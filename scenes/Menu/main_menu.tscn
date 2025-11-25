@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbgmenm6ty21i"]
+
+[ext_resource type="Script" uid="uid://btls1hm7i8vpi" path="res://scenes/Menu/main_menu.gd" id="1_k0vh8"]
+[ext_resource type="PackedScene" uid="uid://de8mguooq5oru" path="res://scenes/Menu/option_menu_panel.tscn" id="2_ymy3e"]
+[ext_resource type="PackedScene" uid="uid://buh7ih2pnh45l" path="res://scenes/Menu/level_select_panel.tscn" id="3_8mcyk"]
+[ext_resource type="PackedScene" uid="uid://bm5taaqsvc3wo" path="res://scenes/Menu/high_scores_panel.tscn" id="4_evs2v"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_k0vh8")
+
+[node name="MainMenuPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(320, 240)
+offset_right = 959.0
+offset_bottom = 542.0
+
+[node name="MainMenuVBoxContainer" type="VBoxContainer" parent="MainMenuPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MainMenuTitle" type="Label" parent="MainMenuPanel/MainMenuVBoxContainer"]
+layout_mode = 2
+text = "Castle Pinball's Last Stand"
+
+[node name="ContinueButton" type="Button" parent="MainMenuPanel/MainMenuVBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../NewGameButton")
+focus_next = NodePath("../NewGameButton")
+focus_previous = NodePath("../ExitButton")
+text = "Coninue Game"
+
+[node name="NewGameButton" type="Button" parent="MainMenuPanel/MainMenuVBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ContinueButton")
+focus_neighbor_bottom = NodePath("../HighscoreButton")
+focus_next = NodePath("../HighscoreButton")
+focus_previous = NodePath("../ContinueButton")
+text = "New Game
+"
+
+[node name="HighscoreButton" type="Button" parent="MainMenuPanel/MainMenuVBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../NewGameButton")
+focus_neighbor_bottom = NodePath("../OptionButton")
+focus_next = NodePath("../OptionButton")
+focus_previous = NodePath("../NewGameButton")
+text = "Highscore"
+
+[node name="OptionButton" type="Button" parent="MainMenuPanel/MainMenuVBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HighscoreButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../HighscoreButton")
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="MainMenuPanel/MainMenuVBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../OptionButton")
+focus_next = NodePath("../ContinueButton")
+focus_previous = NodePath("../OptionButton")
+text = "Exit"
+
+[node name="MenuCamera2D" type="Camera2D" parent="."]
+
+[node name="OptionMenuPanel" parent="." instance=ExtResource("2_ymy3e")]
+visible = false
+
+[node name="LevelSelectPanel" parent="." instance=ExtResource("3_8mcyk")]
+visible = false
+
+[node name="HighScoresPanel" parent="." instance=ExtResource("4_evs2v")]
+visible = false
+
+[connection signal="pressed" from="MainMenuPanel/MainMenuVBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MainMenuPanel/MainMenuVBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MainMenuPanel/MainMenuVBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
+[connection signal="pressed" from="MainMenuPanel/MainMenuVBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="MainMenuPanel/MainMenuVBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="aborted" from="OptionMenuPanel" to="." method="_on_option_menu_panel_aborted"]
+[connection signal="saved" from="OptionMenuPanel" to="." method="_on_option_menu_panel_saved"]
+[connection signal="level_selected" from="LevelSelectPanel" to="." method="_on_level_select_panel_level_selected"]
+[connection signal="pressed_back" from="LevelSelectPanel" to="." method="_on_level_select_panel_pressed_back"]
+[connection signal="backToMenu" from="HighScoresPanel" to="." method="_on_high_scores_panel_back_to_menu"]

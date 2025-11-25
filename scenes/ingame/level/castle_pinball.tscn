@@ -1,0 +1,182 @@
+[gd_scene load_steps=17 format=3 uid="uid://monw6cpvr0ju"]
+
+[ext_resource type="Script" uid="uid://dkrppnnb4g0io" path="res://scenes/ingame/level/castle_pinball.gd" id="1_bdgoo"]
+[ext_resource type="Texture2D" uid="uid://pr22vnkfqm8f" path="res://textures/grass.png" id="2_khtj2"]
+[ext_resource type="Texture2D" uid="uid://dbhf36wb4kgrw" path="res://textures/wood.png" id="3_8cx3y"]
+[ext_resource type="Texture2D" uid="uid://c7c2231olly8u" path="res://textures/left_castle.png" id="4_hcfqd"]
+[ext_resource type="Texture2D" uid="uid://7deglq12syys" path="res://textures/right_castle.png" id="5_vs11d"]
+[ext_resource type="PackedScene" uid="uid://bctgti30o5gsh" path="res://scenes/ingame/player/flipper.tscn" id="6_wui44"]
+[ext_resource type="PackedScene" uid="uid://cu6ghu127s3aw" path="res://scenes/ingame/decoration/spride_line.tscn" id="7_grja1"]
+[ext_resource type="PackedScene" uid="uid://cdu57vyksybj5" path="res://scenes/ingame/player/launch_area_2d.tscn" id="8_3ilpu"]
+[ext_resource type="PackedScene" uid="uid://dxeuvlriw1ls3" path="res://scenes/ingame/player/bumper_tower.tscn" id="9_6dtu6"]
+[ext_resource type="PackedScene" uid="uid://bx87mk1ddlhj4" path="res://scenes/ingame/player/left_sling_shot.tscn" id="10_cibsy"]
+[ext_resource type="PackedScene" uid="uid://cmd1okapf5x8j" path="res://scenes/ingame/player/right_sling_shot.tscn" id="11_lmqjp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8q7"]
+size = Vector2(3217, 39)
+
+[sub_resource type="Curve2D" id="Curve2D_8k4ju"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 414, -21, 0, 0, 0, 0, 373, 1, 0, 0, 0, 0, 208, 30, 0, 0, 0, 0, 146, 66, 0, 0, 0, 0, 104, 112, 0, 0, 0, 0, 91, 165, 0, 0, 0, 0, 78, 228, 0, 0, 0, 0, 69, 302, 0, 0, 0, 0, 153, 1729, 0, 0, 0, 0, 0, 1730)
+}
+point_count = 10
+
+[sub_resource type="Curve2D" id="Curve2D_l8v81"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1420, 184, 0, 0, 0, 0, 1425, 247, 0, 0, 0, 0, 1520, 248, 0, 0, 0, 0, 1593, 269, 0, 0, 0, 0, 1652, 297, 0, 0, 0, 0, 1709, 321, 0, 0, 0, 0, 1787, 414, 0, 0, 0, 0, 1811, 534, 0, 0, 0, 0, 1758, 1733)
+}
+point_count = 9
+
+[sub_resource type="Curve2D" id="Curve2D_vyht1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1424, -27, 0, 0, 0, 0, 1435, 111, 0, 0, 0, 0, 1673, 126, 0, 0, 0, 0, 1795, 209, 0, 0, 0, 0, 1882, 296, 0, 0, 0, 0, 1927, 390, 0, 0, 0, 0, 1934, 534, 0, 0, 0, 0, 1894, 1587)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_bf3um"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1423, 184, 0, 0, 0, 0, 1534, 184, 0, 0, 0, 0, 1648, 225, 0, 0, 0, 0, 1765, 298, 0, 0, 0, 0, 1844, 408, 0, 0, 0, 0, 1858, 543, 0, 0, 0, 0, 1818, 1584)
+}
+point_count = 7
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_bdgoo")
+
+[node name="GrassBackground" type="Polygon2D" parent="."]
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("2_khtj2")
+polygon = PackedVector2Array(-182, -190, 2315, -187, 2312, 2298, -400, 2298)
+
+[node name="LeftBoarder" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftBoarder"]
+polygon = PackedVector2Array(421, -25, 373, 1, 210, 29, 149, 66, 104, 112, 92, 164, 78, 230, 69, 303, 150, 1730, 800, 2080, 800, 2160, 0, 2160, 0, 0)
+
+[node name="CastlePolygon" type="Polygon2D" parent="LeftBoarder"]
+texture_repeat = 2
+polygon = PackedVector2Array(150, 1730, 800, 2080, 800, 2160, 0, 2160, 0, 1730)
+
+[node name="Polygon2D" type="Polygon2D" parent="LeftBoarder"]
+texture_repeat = 2
+texture = ExtResource("3_8cx3y")
+polygon = PackedVector2Array(0, 0, 50, 0, 415, -22, 371, 2, 208, 30, 148, 66, 104, 111, 92, 166, 78, 230, 70, 303, 150, 1730, 0, 1730)
+
+[node name="CastleTexture" type="TextureRect" parent="LeftBoarder"]
+z_index = 1
+offset_top = 1675.0
+offset_right = 801.0
+offset_bottom = 2160.0
+texture = ExtResource("4_hcfqd")
+
+[node name="RightBorder" type="StaticBody2D" parent="."]
+
+[node name="CastlePolygon2D" type="Polygon2D" parent="RightBorder"]
+polygon = PackedVector2Array(1770, 1730, 1120, 2080, 1120, 2160, 1920, 2160, 1920, 1730)
+
+[node name="CastleCollisionPolygon2D" type="CollisionPolygon2D" parent="RightBorder"]
+polygon = PackedVector2Array(1780, 1730, 1120, 2080, 1120, 2160, 1920, 2160, 1920, 1730)
+
+[node name="LeftLauncherCollisionPolygon2D" type="CollisionPolygon2D" parent="RightBorder"]
+polygon = PackedVector2Array(1758, 1730, 1810, 540, 1789, 422, 1717, 336, 1624, 281, 1524, 250, 1423, 250, 1423, 184, 1534, 184, 1648, 225, 1765, 298, 1845, 408, 1858, 543, 1810, 1730)
+
+[node name="RightLauncherCollisionPolygon2D" type="CollisionPolygon2D" parent="RightBorder"]
+polygon = PackedVector2Array(1889, 1730, 1934, 542, 1926, 390, 1881, 295, 1795, 209, 1673, 127, 1435, 110, 1426, -25, 2066, 0, 1955, 1730)
+
+[node name="LeftLauncherPolygon2d" type="Polygon2D" parent="RightBorder"]
+texture_repeat = 2
+texture = ExtResource("3_8cx3y")
+polygon = PackedVector2Array(1758, 1730, 1810, 540, 1789, 422, 1717, 336, 1624, 281, 1524, 250, 1423, 250, 1423, 184, 1534, 184, 1648, 225, 1765, 298, 1845, 408, 1858, 543, 1810, 1730)
+
+[node name="RightLauncherPolygon2D" type="Polygon2D" parent="RightBorder"]
+texture_repeat = 2
+texture = ExtResource("3_8cx3y")
+polygon = PackedVector2Array(1889, 1730, 1934, 542, 1926, 390, 1881, 295, 1795, 209, 1673, 127, 1435, 110, 1426, 0, 2066, 0, 1955, 1730)
+
+[node name="CastleTexture" type="TextureRect" parent="RightBorder"]
+z_index = 2
+offset_left = 1119.0
+offset_top = 1676.0
+offset_right = 1920.0
+offset_bottom = 2161.0
+texture = ExtResource("5_vs11d")
+
+[node name="LevelBottom" type="Area2D" parent="."]
+
+[node name="OutOfBounds" type="CollisionShape2D" parent="LevelBottom"]
+position = Vector2(916, 2184)
+shape = SubResource("RectangleShape2D_pq8q7")
+
+[node name="LeftFlipper" parent="." instance=ExtResource("6_wui44")]
+position = Vector2(802, 2085)
+
+[node name="RightFlipper" parent="." instance=ExtResource("6_wui44")]
+position = Vector2(1120, 2085)
+rotation = -3.1415927
+scale = Vector2(1, -1)
+right_side = true
+input_key = "flipper_right"
+
+[node name="TopBoarder" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopBoarder"]
+polygon = PackedVector2Array(0, 0, 960, -50, 1920, 0, 1920, -100, 0, -100)
+
+[node name="Polygon2D" type="Polygon2D" parent="TopBoarder"]
+polygon = PackedVector2Array(0, 0, 960, -50, 1920, 0, 1920, -100, 0, -100)
+
+[node name="TreeLine" parent="." instance=ExtResource("7_grja1")]
+curve = SubResource("Curve2D_8k4ju")
+
+[node name="RightTreeLine" parent="." instance=ExtResource("7_grja1")]
+curve = SubResource("Curve2D_l8v81")
+
+[node name="TopLauncherTreeLine" parent="." instance=ExtResource("7_grja1")]
+curve = SubResource("Curve2D_vyht1")
+
+[node name="BottomLauncherTreeLine2" parent="." instance=ExtResource("7_grja1")]
+curve = SubResource("Curve2D_bf3um")
+
+[node name="LaunchArea2D" parent="." instance=ExtResource("8_3ilpu")]
+position = Vector2(1855, 1690)
+
+[node name="BumperTower" parent="." instance=ExtResource("9_6dtu6")]
+position = Vector2(1468, 1166)
+
+[node name="BumperTower2" parent="." instance=ExtResource("9_6dtu6")]
+position = Vector2(432, 1140)
+
+[node name="BumperTower3" parent="." instance=ExtResource("9_6dtu6")]
+position = Vector2(720, 1528)
+
+[node name="BumperTower4" parent="." instance=ExtResource("9_6dtu6")]
+position = Vector2(1156, 1532)
+
+[node name="BumperTower5" parent="." instance=ExtResource("9_6dtu6")]
+position = Vector2(546, 669)
+
+[node name="BumperTower6" parent="." instance=ExtResource("9_6dtu6")]
+position = Vector2(1326, 677)
+
+[node name="LeftSingShot" parent="." instance=ExtResource("10_cibsy")]
+position = Vector2(409.00003, 1676)
+scale = Vector2(5, 5)
+
+[node name="RightSingShot" parent="." instance=ExtResource("11_lmqjp")]
+position = Vector2(319.00003, 230)
+scale = Vector2(5, 5)
+
+[node name="RightSingShot2" parent="." instance=ExtResource("11_lmqjp")]
+position = Vector2(1529, 1647)
+scale = Vector2(5, 5)
+
+[node name="LeftSingShot2" parent="." instance=ExtResource("10_cibsy")]
+position = Vector2(1080, 981)
+scale = Vector2(3, 3)
+
+[node name="RightSingShot3" parent="." instance=ExtResource("11_lmqjp")]
+position = Vector2(759, 978)
+scale = Vector2(3, 3)
+
+[connection signal="area_entered" from="LevelBottom" to="." method="_on_level_bottom_area_entered"]
+[connection signal="body_entered" from="LevelBottom" to="." method="_on_level_bottom_body_entered"]

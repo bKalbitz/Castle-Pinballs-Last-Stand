@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://buh7ih2pnh45l"]
+
+[ext_resource type="Script" uid="uid://civtghjf5odb3" path="res://scenes/Menu/level_select_panel.gd" id="1_vkk2u"]
+
+[node name="LevelSelectPanel" type="Panel"]
+custom_minimum_size = Vector2(320, 240)
+offset_right = 959.0
+offset_bottom = 542.0
+script = ExtResource("1_vkk2u")
+
+[node name="LevelSelectBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Levels" type="Label" parent="LevelSelectBoxContainer"]
+layout_mode = 2
+text = "Select a level"
+
+[node name="BackButton" type="Button" parent="LevelSelectBoxContainer"]
+layout_mode = 2
+text = "Back
+"
+
+[connection signal="pressed" from="LevelSelectBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

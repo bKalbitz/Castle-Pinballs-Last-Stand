@@ -1,0 +1,196 @@
+[gd_scene load_steps=3 format=3 uid="uid://de8mguooq5oru"]
+
+[ext_resource type="Script" uid="uid://mx54r8lci4wa" path="res://scenes/Menu/option_menu_panel.gd" id="1_kb3rr"]
+[ext_resource type="PackedScene" uid="uid://b1p0vr6tg5xpg" path="res://scenes/Menu/set_key_button.tscn" id="2_4gnv0"]
+
+[node name="OptionMenuPanel" type="Panel"]
+process_mode = 3
+offset_right = 962.0
+offset_bottom = 543.0
+script = ExtResource("1_kb3rr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+current_tab = 0
+
+[node name="Video" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Controls")
+focus_neighbor_bottom = NodePath("ResolutionHBoxContainer/OptionButton")
+focus_next = NodePath("ResolutionHBoxContainer")
+focus_previous = NodePath("../../HBoxContainer/SaveButton")
+metadata/_tab_index = 0
+
+[node name="ResolutionHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Video"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Video/ResolutionHBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_right = NodePath("../../../Controls")
+focus_neighbor_bottom = NodePath("../../FullscreenCheckBox")
+focus_next = NodePath("../../../Controls")
+focus_previous = NodePath("../..")
+item_count = 7
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1280x800"
+popup/item_1/id = 1
+popup/item_2/text = "1366x768"
+popup/item_2/id = 2
+popup/item_3/text = "1600x900"
+popup/item_3/id = 3
+popup/item_4/text = "1920x1080"
+popup/item_4/id = 4
+popup/item_5/text = "2560x1440"
+popup/item_5/id = 5
+popup/item_6/text = "3840x2160"
+popup/item_6/id = 6
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Video/ResolutionHBoxContainer"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="VBoxContainer/TabContainer/Video"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ResolutionHBoxContainer/OptionButton")
+focus_neighbor_right = NodePath("../../Controls")
+focus_neighbor_bottom = NodePath("../../../HBoxContainer/SaveButton")
+focus_next = NodePath("../../Controls")
+focus_previous = NodePath("../ResolutionHBoxContainer/OptionButton")
+text = "Fullscreen"
+
+[node name="Controls" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../Video")
+focus_neighbor_bottom = NodePath("FlipperLeftHBoxContainer/SetKeyButton")
+focus_next = NodePath("FlipperLeftHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../Video/FullscreenCheckBox")
+metadata/_tab_index = 1
+
+[node name="FlipperLeftHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/FlipperLeftHBoxContainer"]
+layout_mode = 2
+text = "Left Flipper"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/FlipperLeftHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../FlipperRightHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../..")
+action = "flipper_left"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/FlipperLeftHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../SetKeyButton")
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath("../../FlipperRightHBoxContainer/SetKeyButton")
+focus_next = NodePath("../../FlipperRightHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "flipper_left"
+action_key_index = 1
+
+[node name="FlipperRightHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/FlipperRightHBoxContainer"]
+layout_mode = 2
+text = "Right Flipper:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/FlipperRightHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../FlipperLeftHBoxContainer/SetKeyAltButton")
+action = "flipper_right"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/FlipperRightHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+action = "flipper_right"
+action_key_index = 1
+
+[node name="BallActionHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/BallActionHBoxContainer"]
+layout_mode = 2
+text = "Launch or Reset Ball:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/BallActionHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../OpenMenuHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../FlipperLeftHBoxContainer/SetKeyAltButton")
+action = "ball_action"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/BallActionHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath("../../OpenMenuHBoxContainer/SetKeyButton")
+focus_next = NodePath("../../../../HBoxContainer/SaveButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "ball_action"
+action_key_index = 1
+
+[node name="OpenMenuHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/OpenMenuHBoxContainer"]
+layout_mode = 2
+text = "Back to Menu:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/OpenMenuHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer/SaveButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../BallActionHBoxContainer/SetKeyAltButton")
+action = "open_menu"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/OpenMenuHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../SetKeyButton")
+focus_neighbor_top = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_neighbor_bottom = NodePath("../SetKeyButton")
+focus_next = NodePath("../../../../HBoxContainer/SaveButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "open_menu"
+action_key_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../CancelButton")
+focus_neighbor_top = NodePath("../../TabContainer/Video")
+focus_previous = NodePath("../../TabContainer/Controls")
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../TabContainer/Video")
+focus_neighbor_right = NodePath("../SaveButton")
+text = "Cancel"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

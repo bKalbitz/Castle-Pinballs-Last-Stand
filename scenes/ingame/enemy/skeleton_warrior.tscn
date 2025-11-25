@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://bri65okcm4m4d"]
+
+[ext_resource type="Texture2D" uid="uid://cq5vbrxyg2qu4" path="res://textures/skeleton_warrior.png" id="1_760gm"]
+[ext_resource type="Script" uid="uid://cf6qfgjhs7ult" path="res://scenes/ingame/enemy/skeleton_warrior.gd" id="1_cqi7j"]
+[ext_resource type="Texture2D" uid="uid://cd6co18wn4tku" path="res://textures/bones.png" id="2_a6hql"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6hql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_760gm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqi7j"]
+size = Vector2(36, 58)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkbtl"]
+particle_flag_disable_z = true
+angle_min = -203.29999
+angle_max = 200.00002
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+angular_velocity_min = 1.9999839
+angular_velocity_max = 9.999984
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 4.9999776
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 4.9999976
+radial_accel_max = 29.999996
+scale_min = 0.5
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+
+[node name="SleletonWarrior" type="Area2D" groups=["reset_game_group"]]
+script = ExtResource("1_cqi7j")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -1
+position = Vector2(15.999999, 45.999996)
+rotation = -3.1415927
+scale = Vector2(1, 0.75)
+skew = -0.7853982
+texture = ExtResource("1_760gm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a6hql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_cqi7j")
+
+[node name="OnHitParticle" type="GPUParticles2D" parent="."]
+position = Vector2(0, -10)
+emitting = false
+texture = ExtResource("2_a6hql")
+one_shot = true
+explosiveness = 0.81
+randomness = 0.12
+process_material = SubResource("ParticleProcessMaterial_lkbtl")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="finished" from="OnHitParticle" to="." method="_on_on_hit_particle_finished"]

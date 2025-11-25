@@ -1,0 +1,200 @@
+{
+	"FLIPPER_BLAST": {
+		"title": "Flipper Blast",
+		"icon": "res://textures/icons/tower_shoot.png",
+		"levels": [
+			{
+				"text": "FLIPPER_BLAST level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "FLIPPER_BLAST level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "FLIPPER_BLAST level 3 description",
+				"timeout": 1.0
+			}
+		]
+	}, 
+	"FLIPPER_SHOT": {
+		"title": "FLIPPER_SHOT",
+		"icon": "res://textures/icons/tower_shoot.png",
+		"levels": [
+			{
+				"text": "FLIPPER_SHOT level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "FLIPPER_SHOT level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "FLIPPER_SHOT level 3 description",
+				"timeout": 1.0
+			}
+		]
+	},
+	"FlIPPER_DAMAGE": {
+		"title": "Flipper Blast",
+		"icon": "res://textures/icons/tower_shoot.png",
+		"levels": [
+			{
+				"text": "FlIPPER_DAMAGE level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "FlIPPER_DAMAGE level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "FlIPPER_DAMAGE level 3 description",
+				"timeout": 1.0
+			}
+		]
+	},
+	"BALL_MINE": {
+		"title": "BALL_MINE",
+		"icon": "res://textures/icons/mine.png",
+		"levels": [
+			{
+				"text": "BALL_MINE level 1 description",
+				"timeout": 2.0
+			},
+			{
+				"text": "BALL_MINE level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "BALL_MINE level 3 description",
+				"timeout": 1.0
+			}
+		]
+	},
+	"BALL_SPAWN": {
+		"title": "BALL_SPAWN",
+		"icon": "res://textures/icons/clone_ball.png",
+		"levels": [
+			{
+				"text": "BALL_SPAWN level 1 description",
+				"timeout": 4.0
+			},
+			{
+				"text": "BALL_SPAWN level 2 description",
+				"timeout": 4.0
+			},
+			{
+				"text": "BALL_SPAWN level 3 description",
+				"timeout": 2.0
+			}
+		]
+	},
+	"BALL_EXPLODE": {
+		"title": "BALL_EXPLODE",
+		"icon": "res://textures/icons/explode.png",
+		"levels": [
+			{
+				"text": "BALL_EXPLODE level 1 description",
+				"timeout": 0.0
+			},
+			{
+				"text": "BALL_EXPLODE level 2 description",
+				"timeout": 0.0
+			},
+			{
+				"text": "BALL_EXPLODE level 3 description",
+				"timeout": 0.0
+			}
+		]
+	},
+	"BALL_SLOW_DOWN": {
+		"title": "BALL_SLOW_DOWN",
+		"icon": "res://textures/icons/glue.png",
+		"levels": [
+			{
+				"text": "BALL_SLOW_DOWN level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "BALL_SLOW_DOWN level 2 description",
+				"timeout": 0.75
+			},
+			{
+				"text": "BALL_SLOW_DOWN level 3 description",
+				"timeout": 0.5
+			}
+		]
+	},
+	"BUMPER_SHOOT": {
+		"title": "BUMPER_SHOOT",
+		"icon": "res://textures/icons/tower_shoot.png",
+		"levels": [
+			{
+				"text": "BUMPER_SHOOT level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "BUMPER_SHOOT level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "BUMPER_SHOOT level 3 description",
+				"timeout": 1.0
+			}
+		]
+	},
+	"BUMPER_SET_BALL_ON_FIRE": {
+		"title": "BUMPER_SET_BALL_ON_FIRE",
+		"icon": "res://textures/icons/fire_ball.png",
+		"levels": [
+			{
+				"text": "BUMPER_SET_BALL_ON_FIRE level 1 description",
+				"timeout": 0.0
+			},
+			{
+				"text": "BUMPER_SET_BALL_ON_FIRE level 2 description",
+				"timeout": 0.0
+			},
+			{
+				"text": "BUMPER_SET_BALL_ON_FIRE level 3 description",
+				"timeout": 0.0
+			}
+		]
+	},
+	"BUMPER_RANDOM_METEOR": {
+		"title": "BUMPER_RANDOM_METEOR",
+		"icon": "res://textures/icons/tower_shoot.png",
+		"levels": [
+			{
+				"text": "BUMPER_RANDOM_METEOR level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "BUMPER_RANDOM_METEOR level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "BUMPER_RANDOM_METEOR level 3 description",
+				"timeout": 1.0
+			}
+		]
+	},
+	"REPAIR": {
+		"title": "Repair",
+		"icon": "res://textures/icons/repair.png",
+		"levels": [
+			{
+				"text": "REPAIR level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "REPAIR level 2 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "REPAIR level 3 description",
+				"timeout": 1.0
+			}
+		]
+	}
+}

@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://chob2s1ucn3wl"]
+
+[ext_resource type="Script" uid="uid://dbop1nrkph60b" path="res://scenes/ingame/player/level_up_hud.gd" id="1_noasq"]
+
+[node name="LevelUpHud" type="Panel"]
+offset_right = 373.0
+offset_bottom = 170.0
+script = ExtResource("1_noasq")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+process_mode = 3
+z_index = 5
+layout_mode = 0
+offset_right = 374.0
+offset_bottom = 170.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Level up"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Upgrade1Button" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Upgrade3Button")
+focus_neighbor_right = NodePath("../Upgrade2Button")
+focus_next = NodePath("../Upgrade2Button")
+focus_previous = NodePath("../Upgrade3Button")
+text = "Chose one"
+
+[node name="Upgrade2Button" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Upgrade1Button")
+focus_neighbor_right = NodePath("../Upgrade3Button")
+focus_next = NodePath("../Upgrade3Button")
+focus_previous = NodePath("../Upgrade1Button")
+text = "Chose one"
+
+[node name="Upgrade3Button" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Upgrade2Button")
+focus_neighbor_right = NodePath("../Upgrade1Button")
+focus_next = NodePath("../Upgrade1Button")
+focus_previous = NodePath("../Upgrade2Button")
+text = "Chose one"
+
+[node name="DescriptionLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Upgrade text"
+horizontal_alignment = 1
+
+[connection signal="focus_entered" from="VBox/HBox/Upgrade1Button" to="." method="_on_upgrade_button_focus_entered" binds= [0]]
+[connection signal="pressed" from="VBox/HBox/Upgrade1Button" to="." method="_on_upgrade_button_pressed" binds= [0]]
+[connection signal="focus_entered" from="VBox/HBox/Upgrade2Button" to="." method="_on_upgrade_button_focus_entered" binds= [1]]
+[connection signal="pressed" from="VBox/HBox/Upgrade2Button" to="." method="_on_upgrade_button_pressed" binds= [1]]
+[connection signal="focus_exited" from="VBox/HBox/Upgrade3Button" to="." method="_on_upgrade_button_focus_entered" binds= [2]]
+[connection signal="pressed" from="VBox/HBox/Upgrade3Button" to="." method="_on_upgrade_button_pressed" binds= [2]]

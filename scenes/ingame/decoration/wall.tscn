@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmdnmiqt8dmud"]
+
+[ext_resource type="Script" uid="uid://s4vj7o0hco2w" path="res://scenes/ingame/decoration/tree.gd" id="1_y4f30"]
+[ext_resource type="Texture2D" uid="uid://bwqiuv6xgdtri" path="res://textures/castlewall.png" id="2_y4f30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnvrw"]
+size = Vector2(61, 60)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nnvrw"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -20, 0)
+angle_min = -251.4
+angle_max = 164.50002
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+angular_velocity_min = 39.999985
+angular_velocity_max = 99.999985
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 4.9999976
+radial_accel_max = 24.999998
+scale_min = 2.0
+scale_max = 5.0
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 10.0
+color = Color(0.22821459, 0.3665982, 0.1590228, 1)
+hue_variation_min = 0.99999994
+hue_variation_max = 0.99999994
+anim_speed_min = 1.02
+anim_speed_max = 4.06
+
+[node name="Wall" type="Area2D"]
+script = ExtResource("1_y4f30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_y4f30")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 2)
+shape = SubResource("RectangleShape2D_nnvrw")
+
+[node name="TreeHitParticle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_nnvrw")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

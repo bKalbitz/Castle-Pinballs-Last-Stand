@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqfs0cmry2nic"]
+
+[ext_resource type="Texture2D" uid="uid://b0rjmp5tv10jq" path="res://textures/icons/fire_ball.png" id="1_a7g4j"]
+[ext_resource type="Script" uid="uid://doi0grtcw1vqb" path="res://scenes/Menu/level_select_button.gd" id="2_i0sg5"]
+
+[node name="LevelSelectButton" type="Button"]
+text = "Level Name"
+icon = ExtResource("1_a7g4j")
+script = ExtResource("2_i0sg5")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

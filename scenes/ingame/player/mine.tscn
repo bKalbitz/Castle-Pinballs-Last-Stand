@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://p46im7853u2q"]
+
+[ext_resource type="Script" uid="uid://ofigslmd78yi" path="res://scenes/ingame/player/mine.gd" id="1_whxtr"]
+[ext_resource type="Texture2D" uid="uid://bfdpxmdmj4hbs" path="res://textures/mine.png" id="2_2jnad"]
+[ext_resource type="Texture2D" uid="uid://18272o7ny5yj" path="res://textures/exlposion1.png" id="3_rk5ek"]
+[ext_resource type="Texture2D" uid="uid://bj36up2pi13w7" path="res://textures/exlposion2.png" id="4_yf1cu"]
+[ext_resource type="Texture2D" uid="uid://cfc3c3odjip7s" path="res://textures/exlposion3.png" id="5_40fm2"]
+[ext_resource type="Texture2D" uid="uid://cp8rle8xwwoa1" path="res://textures/exlposion4.png" id="6_jge57"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o0u11"]
+radius = 35.014282
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lrif0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rk5ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yf1cu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_40fm2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jge57")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxxwe"]
+radius = 129.09686
+
+[node name="Mine" type="Node2D"]
+script = ExtResource("1_whxtr")
+
+[node name="MineArea2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="MineArea2D"]
+texture = ExtResource("2_2jnad")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MineArea2D"]
+position = Vector2(0, 5)
+scale = Vector2(1, 0.7)
+shape = SubResource("CircleShape2D_o0u11")
+
+[node name="ExplosionArea2D" type="Area2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ExplosionArea2D"]
+sprite_frames = SubResource("SpriteFrames_lrif0")
+frame = 2
+frame_progress = 0.35397556
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
+shape = SubResource("CircleShape2D_qxxwe")

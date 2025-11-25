@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm5taaqsvc3wo"]
+
+[ext_resource type="Script" uid="uid://dlrm727v5hewy" path="res://scenes/Menu/high_scores_panel.gd" id="1_og22x"]
+
+[node name="HighScoresPanel" type="Panel"]
+offset_right = 961.0
+offset_bottom = 538.0
+script = ExtResource("1_og22x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 961.0
+offset_bottom = 538.0
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Highscores"
+horizontal_alignment = 1
+
+[node name="SubmitVBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/SubmitVBoxContainer"]
+layout_mode = 2
+text = "Your score: 0"
+
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/SubmitVBoxContainer"]
+layout_mode = 2
+placeholder_text = "Player Name"
+
+[node name="SubmitButton" type="Button" parent="VBoxContainer/SubmitVBoxContainer"]
+layout_mode = 2
+text = "Submit to Highscore"
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="HighscoreVBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[connection signal="button_down" from="VBoxContainer/SubmitVBoxContainer/SubmitButton" to="." method="_on_submit_button_button_down"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

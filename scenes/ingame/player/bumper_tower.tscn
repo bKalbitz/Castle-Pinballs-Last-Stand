@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxeuvlriw1ls3"]
+
+[ext_resource type="Script" uid="uid://bqnolskehxnme" path="res://scenes/ingame/player/bumper_tower.gd" id="1_7sljc"]
+[ext_resource type="Texture2D" uid="uid://cceqi5aye36op" path="res://textures/tower.png" id="2_qnfmb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_huihk"]
+radius = 49.719776
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ljs0w"]
+radius = 298.06207
+
+[node name="BumperTower" type="Area2D"]
+script = ExtResource("1_7sljc")
+
+[node name="TowerShadowSprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -1
+position = Vector2(44, 43)
+rotation = -3.1415925
+scale = Vector2(1, 0.75)
+skew = -0.78539836
+texture = ExtResource("2_qnfmb")
+
+[node name="TowerSprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -79)
+texture = ExtResource("2_qnfmb")
+
+[node name="TowerCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9.3877316e-07)
+rotation = 0.3926991
+skew = 0.7853982
+shape = SubResource("CircleShape2D_huihk")
+
+[node name="ShootingArea" type="Area2D" parent="."]
+
+[node name="ShootingAreaCollisionShape2D" type="CollisionShape2D" parent="ShootingArea"]
+shape = SubResource("CircleShape2D_ljs0w")
+debug_color = Color(0, 0.6, 0, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

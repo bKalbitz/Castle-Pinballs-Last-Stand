@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1p0vr6tg5xpg"]
+
+[ext_resource type="Script" uid="uid://c0mgoyrs01yui" path="res://scenes/Menu/set_key_button.gd" id="1_8ebtc"]
+
+[node name="SetKeyButton" type="Button"]
+script = ExtResource("1_8ebtc")
+
+[connection signal="draw" from="." to="." method="_on_draw"]

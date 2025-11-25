@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://vgsx4k0dqsje"]
+
+[ext_resource type="Script" uid="uid://dlbox10i3ru" path="res://scenes/ingame/player/glue_spot.gd" id="1_0kfba"]
+[ext_resource type="Texture2D" uid="uid://dd7mjeqnmhchn" path="res://textures/glue.png" id="1_2hpqr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kfba"]
+radius = 32.06244
+
+[node name="GlueSpot" type="Area2D" groups=["reset_game_group"]]
+script = ExtResource("1_0kfba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.5)
+shape = SubResource("CircleShape2D_0kfba")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 48.0
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_2hpqr")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlsrij6ro5kea"]
+
+[ext_resource type="Script" uid="uid://rkd6rj6iwo7e" path="res://scenes/ingame/ingame_root.gd" id="1_u44l2"]
+[ext_resource type="PackedScene" uid="uid://ckq30o0jb7ve8" path="res://scenes/ingame/player/ingame_hud.tscn" id="4_dsvw4"]
+[ext_resource type="PackedScene" uid="uid://cowbkygrkjymy" path="res://scenes/ingame/player/ball.tscn" id="5_rhpok"]
+[ext_resource type="PackedScene" uid="uid://chob2s1ucn3wl" path="res://scenes/ingame/player/level_up_hud.tscn" id="5_ruvbs"]
+[ext_resource type="PackedScene" uid="uid://b80om06016tug" path="res://scenes/ingame/split_screen.tscn" id="10_3ifcr"]
+
+[node name="IngameRoot" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_u44l2")
+
+[node name="Ball" parent="." instance=ExtResource("5_rhpok")]
+position = Vector2(1848, 1940)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SplitScreen" parent="." instance=ExtResource("10_3ifcr")]
+
+[node name="IngameHud" parent="." instance=ExtResource("4_dsvw4")]
+
+[node name="LevelUpHud" parent="." instance=ExtResource("5_ruvbs")]
+
+[connection signal="in_off" from="Ball" to="." method="_on_ball_in_off"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

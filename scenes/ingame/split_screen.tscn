@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b80om06016tug"]
+
+[ext_resource type="Script" uid="uid://d1cw0gtxfyiy7" path="res://scenes/ingame/split_screen.gd" id="1_ue6qg"]
+
+[node name="SplitScreen" type="Node2D"]
+script = ExtResource("1_ue6qg")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = 5
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+
+[node name="DelimiterLine2D" type="Line2D" parent="."]
+z_index = 3
+points = PackedVector2Array(0, 0, 1920, 0)
+default_color = Color(1, 1, 1, 0.39215687)

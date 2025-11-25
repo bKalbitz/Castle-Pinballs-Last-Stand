@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu6ghu127s3aw"]
+
+[ext_resource type="Script" uid="uid://bgl4tvl5uo6an" path="res://scenes/ingame/decoration/spride_line.gd" id="1_uvmr5"]
+
+[sub_resource type="Curve2D" id="Curve2D_l8v81"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 150, 1980, 0, 0, 0, 0, 0, 1980)
+}
+point_count = 3
+
+[node name="TreeLine" type="Path2D"]
+curve = SubResource("Curve2D_l8v81")
+script = ExtResource("1_uvmr5")

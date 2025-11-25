@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckq30o0jb7ve8"]
+
+[ext_resource type="Script" uid="uid://bb4a5fy35yl7" path="res://scenes/ingame/player/ingame_hud.gd" id="1_14wej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbe3c"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14wej"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.30588236, 1, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="IngameHud" type="Panel"]
+z_index = 5
+offset_right = 362.0
+offset_bottom = 98.0
+script = ExtResource("1_14wej")
+
+[node name="VFlowContainer" type="VFlowContainer" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 364.0
+offset_bottom = 99.0
+
+[node name="Score" type="Label" parent="VFlowContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Health" type="ProgressBar" parent="VFlowContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_dbe3c")
+value = 100.0
+show_percentage = false
+
+[node name="Experience" type="ProgressBar" parent="VFlowContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_14wej")
+value = 100.0
+show_percentage = false
+
+[node name="Upgrades" type="HBoxContainer" parent="VFlowContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2

@@ -1,0 +1,8 @@
+[
+	{
+		"name": "Castle Pinball",
+		"description": "Castle Pinball is under siege by monsten an must be hold",
+		"scene": "res://scenes/ingame/level/castle_pinball.tscn",
+		"thumbnail": "res://textures/icons/fire_ball.png"
+	}
+]

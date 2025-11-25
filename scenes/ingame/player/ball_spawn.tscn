@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3oosx7g2a303"]
+
+[ext_resource type="Texture2D" uid="uid://dys4ra64fqlee" path="res://textures/ball.png" id="1_qipw8"]
+[ext_resource type="Script" uid="uid://wfia6g4rp0e1" path="res://scenes/ingame/player/ball_spawn.gd" id="1_v8hgl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8hgl"]
+radius = 16.03122
+
+[node name="BallSpawn" type="RigidBody2D" groups=["reset_game_group"]]
+script = ExtResource("1_v8hgl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qipw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v8hgl")

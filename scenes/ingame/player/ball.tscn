@@ -1,0 +1,118 @@
+[gd_scene load_steps=15 format=3 uid="uid://cowbkygrkjymy"]
+
+[ext_resource type="Script" uid="uid://bmorh5tlp5cgj" path="res://scenes/ingame/player/ball.gd" id="1_41u45"]
+[ext_resource type="Texture2D" uid="uid://dys4ra64fqlee" path="res://textures/ball.png" id="1_x8fbi"]
+[ext_resource type="Texture2D" uid="uid://bj36up2pi13w7" path="res://textures/exlposion2.png" id="4_km6sk"]
+[ext_resource type="Texture2D" uid="uid://cfc3c3odjip7s" path="res://textures/exlposion3.png" id="5_aqd2s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_41u45"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktgx5"]
+radius = 33.01515
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_41u45"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 5, 1)
+spread = 180.0
+initial_velocity_min = 222.22
+initial_velocity_max = 587.3
+gravity = Vector3(0, 98, 0)
+scale_min = 2.0
+scale_max = 8.0
+color = Color(0, 0.54063284, 9.62615e-08, 1)
+anim_speed_min = 0.59999996
+anim_speed_max = 4.16
+anim_offset_max = 0.19049999
+
+[sub_resource type="Curve" id="Curve_41u45"]
+_data = [Vector2(0, 0.3595506), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ktgx5"]
+curve = SubResource("Curve_41u45")
+
+[sub_resource type="Curve" id="Curve_ktgx5"]
+_data = [Vector2(0, 0.79775286), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hgol0"]
+curve = SubResource("Curve_ktgx5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ktgx5"]
+particle_flag_disable_z = true
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_hgol0")
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 1.0
+alpha_curve = SubResource("CurveTexture_ktgx5")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttmr5"]
+radius = 130.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slmy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_km6sk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aqd2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ball" type="RigidBody2D" groups=["reset_game_group"]]
+physics_material_override = SubResource("PhysicsMaterial_41u45")
+script = ExtResource("1_41u45")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -1
+position = Vector2(20.999998, 41.999996)
+rotation = -3.1415927
+scale = Vector2(1, 0.75)
+skew = -0.7853982
+texture = ExtResource("1_x8fbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x8fbi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ktgx5")
+
+[node name="TreeHitParticle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_41u45")
+
+[node name="TrailParticles" type="GPUParticles2D" parent="."]
+texture = ExtResource("1_x8fbi")
+process_material = SubResource("ParticleProcessMaterial_ktgx5")
+
+[node name="ExplosionArea2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
+shape = SubResource("CircleShape2D_ttmr5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ExplosionArea2D"]
+sprite_frames = SubResource("SpriteFrames_slmy8")
+frame = 1
+frame_progress = 0.6248894
+
+[node name="FireArea2D" type="Area2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FireArea2D"]
+modulate = Color(1, 1, 1, 0.5372549)
+sprite_frames = SubResource("SpriteFrames_slmy8")
+frame_progress = 0.4721044
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea2D"]
+shape = SubResource("CircleShape2D_ttmr5")

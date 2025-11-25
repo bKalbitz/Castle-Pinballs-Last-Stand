@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx87mk1ddlhj4"]
+
+[ext_resource type="Script" uid="uid://d0aiukc6iat6u" path="res://scenes/ingame/player/left_sling_shot.gd" id="1_chx0v"]
+[ext_resource type="Texture2D" uid="uid://cv1vwfw6pj7lb" path="res://textures/left_sling_shot.png" id="2_eckpd"]
+[ext_resource type="Script" uid="uid://b1b01bbckf8fl" path="res://scenes/ingame/player/sling_shot_blocking_area.gd" id="3_ubgra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chx0v"]
+size = Vector2(2.8284285, 70.71068)
+
+[node name="SingShot" type="Node2D"]
+script = ExtResource("1_chx0v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 1
+offset_left = -27.0
+offset_top = -39.0
+offset_right = 400.0
+offset_bottom = 477.0
+scale = Vector2(0.1281263, 0.12948538)
+texture = ExtResource("2_eckpd")
+
+[node name="UpperArea2D" type="Area2D" parent="."]
+script = ExtResource("3_ubgra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperArea2D"]
+position = Vector2(1.0000005, -1.0000001)
+rotation = -0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_chx0v")
+
+[node name="LowerArea2D" type="Area2D" parent="."]
+script = ExtResource("3_ubgra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerArea2D"]
+position = Vector2(-0.99999875, 1.0000019)
+rotation = -0.7853982
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_chx0v")
+
+[node name="ShadowPolygon2D" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0, 0, 0, 0.20784314)
+polygon = PackedVector2Array(-23, -27, -27, -23, -27, -19, 28, 34, 32, 29, 27, 23)
+
+[connection signal="body_entered" from="UpperArea2D" to="." method="_on_upper_area_2d_body_entered"]
+[connection signal="body_exited" from="UpperArea2D" to="." method="_on_upper_area_2d_body_exited"]
+[connection signal="body_entered" from="LowerArea2D" to="." method="_on_lower_area_2d_body_entered"]
+[connection signal="body_exited" from="LowerArea2D" to="." method="_on_lower_area_2d_body_exited"]
