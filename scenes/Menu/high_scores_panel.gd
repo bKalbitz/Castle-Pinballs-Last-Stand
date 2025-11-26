@@ -19,6 +19,7 @@ func showScore() -> void:
 	show()
 	$VBoxContainer/SubmitVBoxContainer.hide()
 	$VBoxContainer/BackButton.show()
+	$VBoxContainer/BackButton.grab_focus.call_deferred()
 	loadScores()
 	renderScore()
 
@@ -48,6 +49,7 @@ func submitScore(levelName: String, score: int) -> void:
 	if isHighScore(score):
 		$VBoxContainer/SubmitVBoxContainer/NameLineEdit.show()
 		$VBoxContainer/SubmitVBoxContainer/SubmitButton.show()
+		$VBoxContainer/SubmitVBoxContainer/NameLineEdit.grab_focus.call_deferred()
 		$VBoxContainer/BackButton.hide()
 		submittedScore = score
 		submittedLevel = levelName
@@ -56,6 +58,7 @@ func submitScore(levelName: String, score: int) -> void:
 		$VBoxContainer/SubmitVBoxContainer/NameLineEdit.hide()
 		$VBoxContainer/SubmitVBoxContainer/SubmitButton.hide()
 		$VBoxContainer/BackButton.show()
+		$VBoxContainer/BackButton.grab_focus.call_deferred()
 		submittedScore = 0
 		submittedLevel = ""
 	
@@ -96,6 +99,7 @@ func _on_submit_button_button_down() -> void:
 	SimpleSettings.save()
 	renderScore()
 	$VBoxContainer/BackButton.show()
+	$VBoxContainer/BackButton.grab_focus.call_deferred()
 
 func _on_back_button_pressed() -> void:
 	backToMenu.emit()
