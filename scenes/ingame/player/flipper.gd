@@ -26,6 +26,8 @@ func _process(delta: float) -> void:
 		if not pressed:
 			pressed = true
 			hitEnemies()
+			if not $FlipperSound.playing:
+				$FlipperSound.play()
 	else:
 		pressed = false
 		if right_side:

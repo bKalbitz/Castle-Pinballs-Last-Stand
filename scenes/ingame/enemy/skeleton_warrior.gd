@@ -65,6 +65,7 @@ func leaveTable() -> void:
 func applyDamage(damge: float, type: String) -> void:
 	if not $OnHitParticle.emitting:
 		$OnHitParticle.restart()
+		$DamageSound.play()
 	health = health - damge
 	
 	if health <= 0:

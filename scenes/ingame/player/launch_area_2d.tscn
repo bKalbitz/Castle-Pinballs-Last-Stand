@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdu57vyksybj5"]
+[gd_scene load_steps=10 format=3 uid="uid://cdu57vyksybj5"]
 
 [ext_resource type="Script" uid="uid://176h86l343o2" path="res://scenes/ingame/player/launch_area_2d.gd" id="1_5n8wi"]
 [ext_resource type="Texture2D" uid="uid://gon0ibs6u6n3" path="res://textures/cannon.png" id="2_mvbye"]
+[ext_resource type="AudioStream" uid="uid://khxknklbyj8y" path="res://sounds/shoot.wav" id="3_6g76s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8v81"]
 size = Vector2(75, 76)
@@ -83,6 +84,9 @@ randomness = 0.23
 trail_lifetime = 0.1
 trail_section_subdivisions = 3
 process_material = SubResource("ParticleProcessMaterial_bf3um")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6g76s")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

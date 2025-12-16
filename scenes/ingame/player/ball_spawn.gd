@@ -20,6 +20,7 @@ func leaveTable() -> void:
 	queue_free()
 
 func launch(impulse: Vector2) -> void:
+	$LaunchSound.play()
 	self.apply_impulse(impulse)
 
 func hit(node: Node2D, type: String) -> void:

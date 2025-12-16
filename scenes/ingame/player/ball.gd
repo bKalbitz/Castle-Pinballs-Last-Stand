@@ -60,6 +60,9 @@ func _process(delta: float) -> void:
 			
 	if fireBallUpgradeActive:
 		if currentFireTime < fireBallActiveTime:
+			if not $BallOnFireSound.playing:
+				$BallOnFireSound.play()
+			
 			$FireArea2D.show()
 			currentFireTime = currentFireTime + delta
 			var areas = $FireArea2D.get_overlapping_areas()
@@ -77,6 +80,7 @@ func explode() -> void:
 	exploded = true
 	freeze = true
 	if explodeUpgradeActive:
+		$ExplosionSound.play()
 		$TrailParticles.emitting = false
 		$ExplosionArea2D.show()
 		$ExplosionArea2D/AnimatedSprite2D.play()
@@ -100,18 +104,21 @@ func hit(node: Node2D, type: String) -> void:
 		pass # maybe add upgrade effect here
 
 func launch(impulse: Vector2) -> void:
+	$BallLaunchSound.play()
 	self.apply_impulse(impulse)
 	if fireBallUpgradeActive:
 		currentFireTime = 0
 
 func _on_upgradeLoaded(icon: UpgradeIcon) -> void:
 	if PlayerUpgradeUtils.UpgradeType.BALL_SLOW_DOWN == icon.upgrade:
+		$SetGlueSound.play()
 		var glue = GlueSpot.instantiate()
 		glue.position = position
 		get_parent().add_child(glue)
 		icon.startTimer()
 	elif PlayerUpgradeUtils.UpgradeType.BALL_SPAWN == icon.upgrade:
 		if not inLauncArea:
+			$BallLaunchSound.play()
 			createBallSpawn(1, 1)
 			createBallSpawn(-1, -1)
 			if icon.level > 1:
@@ -119,6 +126,7 @@ func _on_upgradeLoaded(icon: UpgradeIcon) -> void:
 				createBallSpawn(1, -1)
 		icon.startTimer()
 	elif PlayerUpgradeUtils.UpgradeType.BALL_MINE == icon.upgrade:
+		$SetMineSound.play()
 		var mine = Mine.instantiate()
 		mine.position = position
 		get_parent().add_child(mine)

@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 
 func explode() -> void:
 	exploded = true
+	$ExplosionSound.play()
 	$ExplosionArea2D.show()
 	$ExplosionArea2D/AnimatedSprite2D.play()
 	var areas = $ExplosionArea2D.get_overlapping_areas()

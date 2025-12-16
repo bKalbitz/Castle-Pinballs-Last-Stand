@@ -22,6 +22,7 @@ func _process(delta: float) -> void:
 			power = MAX
 	else:
 		if power > 0 && ball && ball.has_method("launch"):
+			$ShootSound.play()
 			var impulse = Vector2(0, IMPULSE_Y * power)
 			ball.launch(impulse)
 			$CannonFireParticle.restart()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://p46im7853u2q"]
+[gd_scene load_steps=11 format=3 uid="uid://p46im7853u2q"]
 
 [ext_resource type="Script" uid="uid://ofigslmd78yi" path="res://scenes/ingame/player/mine.gd" id="1_whxtr"]
 [ext_resource type="Texture2D" uid="uid://bfdpxmdmj4hbs" path="res://textures/mine.png" id="2_2jnad"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bj36up2pi13w7" path="res://textures/exlposion2.png" id="4_yf1cu"]
 [ext_resource type="Texture2D" uid="uid://cfc3c3odjip7s" path="res://textures/exlposion3.png" id="5_40fm2"]
 [ext_resource type="Texture2D" uid="uid://cp8rle8xwwoa1" path="res://textures/exlposion4.png" id="6_jge57"]
+[ext_resource type="AudioStream" uid="uid://ht2aak6chiic" path="res://sounds/explosion.wav" id="7_2jnad"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o0u11"]
 radius = 35.014282
@@ -56,3 +57,6 @@ frame_progress = 0.35397556
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
 shape = SubResource("CircleShape2D_qxxwe")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_2jnad")

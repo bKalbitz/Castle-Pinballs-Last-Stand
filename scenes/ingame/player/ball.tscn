@@ -1,9 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://cowbkygrkjymy"]
+[gd_scene load_steps=20 format=3 uid="uid://cowbkygrkjymy"]
 
 [ext_resource type="Script" uid="uid://bmorh5tlp5cgj" path="res://scenes/ingame/player/ball.gd" id="1_41u45"]
 [ext_resource type="Texture2D" uid="uid://dys4ra64fqlee" path="res://textures/ball.png" id="1_x8fbi"]
 [ext_resource type="Texture2D" uid="uid://bj36up2pi13w7" path="res://textures/exlposion2.png" id="4_km6sk"]
+[ext_resource type="AudioStream" uid="uid://bhgre6q52p450" path="res://sounds/ball_hit.wav" id="5_4s1ih"]
 [ext_resource type="Texture2D" uid="uid://cfc3c3odjip7s" path="res://textures/exlposion3.png" id="5_aqd2s"]
+[ext_resource type="AudioStream" uid="uid://ht2aak6chiic" path="res://sounds/explosion.wav" id="6_16kog"]
+[ext_resource type="AudioStream" uid="uid://04vieshljx4e" path="res://sounds/on_fire.wav" id="7_km6sk"]
+[ext_resource type="AudioStream" uid="uid://dl3fkm6ifcx3x" path="res://sounds/set_mine.wav" id="8_aqd2s"]
+[ext_resource type="AudioStream" uid="uid://epcohhnn0wvx" path="res://sounds/set_glue.wav" id="9_00oep"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_41u45"]
 
@@ -116,3 +121,18 @@ frame_progress = 0.4721044
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea2D"]
 shape = SubResource("CircleShape2D_ttmr5")
+
+[node name="BallLaunchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4s1ih")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_16kog")
+
+[node name="BallOnFireSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_km6sk")
+
+[node name="SetMineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_aqd2s")
+
+[node name="SetGlueSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_00oep")

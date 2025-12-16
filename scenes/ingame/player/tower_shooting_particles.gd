@@ -7,6 +7,7 @@ func _ready() -> void:
 
 func fire(normelizedDirection: Vector2) -> void:
 	process_material.direction = Vector3(normelizedDirection.x * 1000, normelizedDirection.y * 1000, 0)
+	$ShootSound.play()
 	restart()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
