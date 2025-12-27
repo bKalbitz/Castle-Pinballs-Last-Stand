@@ -67,11 +67,9 @@ func _on_exit_button_pressed() -> void:
 	get_tree().quit(0)
 
 
-func _on_option_menu_panel_saved(videoChange: bool,  controlChange: bool) -> void:
+func _on_option_menu_panel_saved(videoChange: bool) -> void:
 	if videoChange:
 		videoSettingsChanged.emit()
-	if controlChange:
-		setControls()
 	exitOptions()
 
 
@@ -83,9 +81,6 @@ func exitOptions() -> void:
 	$MainMenuPanel.show()
 	$MainMenuPanel/MainMenuVBoxContainer/NewGameButton.grab_focus.call_deferred()
 	
-
-func setControls() -> void:
-	pass
 
 func gameOver(levelName: String, score: int) -> void:
 	ingame = false

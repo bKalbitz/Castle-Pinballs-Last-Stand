@@ -24,6 +24,7 @@ current_tab = 0
 
 [node name="Video" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../Sound")
 focus_neighbor_right = NodePath("../Controls")
 focus_neighbor_bottom = NodePath("ResolutionHBoxContainer/OptionButton")
 focus_next = NodePath("ResolutionHBoxContainer")
@@ -73,6 +74,7 @@ text = "Fullscreen"
 visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Video")
+focus_neighbor_right = NodePath("../Sound")
 focus_neighbor_bottom = NodePath("FlipperLeftHBoxContainer/SetKeyButton")
 focus_next = NodePath("FlipperLeftHBoxContainer/SetKeyButton")
 focus_previous = NodePath("../Video/FullscreenCheckBox")
@@ -175,6 +177,30 @@ focus_next = NodePath("../../../../HBoxContainer/SaveButton")
 focus_previous = NodePath("../SetKeyButton")
 action = "open_menu"
 action_key_index = 1
+
+[node name="Sound" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../Controls")
+focus_neighbor_right = NodePath("../Video")
+focus_neighbor_bottom = NodePath("FXHBoxContainer/HSlider")
+metadata/_tab_index = 2
+
+[node name="FXHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Sound"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Sound/FXHBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Sound/FXHBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer/SaveButton")
+focus_next = NodePath("../../../../HBoxContainer/SaveButton")
+max_value = 1.0
+step = 0.05
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

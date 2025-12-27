@@ -9,6 +9,7 @@ var actionFlipperRight
 var actionFlipperLeft
 var actionBallAction
 var actionOpenMenu
+var volume: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,6 +23,7 @@ func loadSettiings() -> void:
 	actionFlipperRight = loadActionInput("flipper_right")
 	actionBallAction = loadActionInput("ball_action")
 	actionOpenMenu = loadActionInput("open_menu")
+	volume = SimpleSettings.get_value("game", "sound/volume", 1.0)
 	
 	var resOptions = $VBoxContainer/TabContainer/Video/ResolutionHBoxContainer/OptionButton
 	for i in resOptions.item_count:
@@ -30,6 +32,7 @@ func loadSettiings() -> void:
 			resOptions.selected = i
 			break
 	$VBoxContainer/TabContainer/Video/FullscreenCheckBox.button_pressed = fullscreen
+	$VBoxContainer/TabContainer/Sound/FXHBoxContainer/HSlider.value = volume;
 
 func loadActionInput(action: String) -> Array[InputEvent]:
 	var input = SimpleSettings.get_value("game", str("control/action_", action), null)
@@ -59,12 +62,19 @@ func _on_save_button_pressed() -> void:
 	SimpleSettings.set_value("game", "video/resolution", newResolution)
 	var newFullscreen = $VBoxContainer/TabContainer/Video/FullscreenCheckBox.button_pressed
 	SimpleSettings.set_value("game", "video/fullscreen", $VBoxContainer/TabContainer/Video/FullscreenCheckBox.button_pressed)
+	if volume != $VBoxContainer/TabContainer/Sound/FXHBoxContainer/HSlider.value:
+		volume = $VBoxContainer/TabContainer/Sound/FXHBoxContainer/HSlider.value
+		SimpleSettings.set_value("game", "sound/volume", volume)
+		var busIndex = AudioServer.get_bus_index("Master")
+		AudioServer.set_bus_volume_db(busIndex, linear_to_db(volume))
+		AudioServer.set_bus_mute(busIndex, volume < 0.05)
 	saveAction("flipper_left")
 	saveAction("flipper_right")
 	saveAction("ball_action")
 	saveAction("open_menu")
 	SimpleSettings.save()
-	saved.emit(newResolution != resolution || newFullscreen != fullscreen, false)
+	
+	saved.emit(newResolution != resolution || newFullscreen != fullscreen)
 
 func saveAction(action: String) -> void:
 	SimpleSettings.set_value("game", str("control/action_", action), InputMap.action_get_events(action))
