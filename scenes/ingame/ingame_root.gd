@@ -15,6 +15,8 @@ signal gameOver
 
 var Ball = preload("res://scenes/ingame/player/ball.tscn")
 var Skelet = preload("res://scenes/ingame/enemy/skeleton_warrior.tscn")
+var Minotaur = preload("res://scenes/ingame/enemy/minotaur.tscn")
+var enememy_types = [Skelet, Minotaur]
 var camera_follow_ball = true
 var current_ball
 var spawnCount = 5
@@ -84,7 +86,7 @@ func _on_spawn_timer_timeout() -> void:
 		var x = level.getEnemySpawnPosX() + (randi() % level.getEnemySpawnOffsetX())
 		var y = level.getEnemySpawnPosY() + (randi() % level.getEnemySpawnOffsetY())
 		var target = enemyMoveTo
-		var enemy = Skelet.instantiate()
+		var enemy = enememy_types[randi() % enememy_types.size()].instantiate()
 		enemy.move_to = target
 		enemy.position = Vector2(x, y)
 		enemy.connect("destroyed", Callable(self, "_on_enemy_destroyed"))
