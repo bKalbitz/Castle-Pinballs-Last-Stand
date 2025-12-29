@@ -65,9 +65,7 @@ func _on_save_button_pressed() -> void:
 	if volume != $VBoxContainer/TabContainer/Sound/FXHBoxContainer/HSlider.value:
 		volume = $VBoxContainer/TabContainer/Sound/FXHBoxContainer/HSlider.value
 		SimpleSettings.set_value("game", "sound/volume", volume)
-		var busIndex = AudioServer.get_bus_index("Master")
-		AudioServer.set_bus_volume_db(busIndex, linear_to_db(volume))
-		AudioServer.set_bus_mute(busIndex, volume < 0.05)
+		Root.applyAudioSettings()
 	saveAction("flipper_left")
 	saveAction("flipper_right")
 	saveAction("ball_action")

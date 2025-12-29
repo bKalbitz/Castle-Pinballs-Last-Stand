@@ -1,4 +1,4 @@
-extends Node2D
+class_name Root extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +13,7 @@ func _ready() -> void:
 	SimpleSettings.load()
 	$IngameRoot.setPaused(true)
 	setVideoSettings()
+	applyAudioSettings()
 	$IngameRoot.hide()
 	$MainMenu.showMenu()
 
@@ -56,3 +57,9 @@ func _on_ingame_root_game_over(levelName: String, score: int) -> void:
 	$IngameRoot.setPaused(true)
 	$IngameRoot.hide()
 	$MainMenu.gameOver(levelName, score)
+	
+static func applyAudioSettings() -> void:
+	var volume = SimpleSettings.get_value("game", "sound/volume", 1.0)
+	var busIndex = AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_volume_db(busIndex, linear_to_db(volume))
+	AudioServer.set_bus_mute(busIndex, volume < 0.05)
