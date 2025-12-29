@@ -7,6 +7,7 @@ const Mine = preload("res://scenes/ingame/player/mine.tscn")
 const BallSpawn = preload("res://scenes/ingame/player/ball_spawn.tscn")
 
 const MAX_EXPLOSION_TIME = 0.500
+const FIRE_HIT_PARTICLE_COLOR = Color(1, 0.6, 0)
 
 var damage = 1
 var holdTime = 0.0
@@ -98,10 +99,13 @@ func hit(node: Node2D, type: String) -> void:
 	if node.has_method("applyDamage"):
 		node.applyDamage(damage, "basic")
 	
-	if type == "tree" && not $TreeHitParticle.emitting:
-		$TreeHitParticle.restart()
-	elif type == "enemy":
-		pass # maybe add upgrade effect here
+	if not $HitParticle.emitting:
+		var color = node.get("hitParticleColor")
+		if color:
+			if currentFireTime < fireBallActiveTime:
+				color = FIRE_HIT_PARTICLE_COLOR
+			$HitParticle.process_material.color = color
+			$HitParticle.restart()
 
 func launch(impulse: Vector2) -> void:
 	$BallLaunchSound.play()

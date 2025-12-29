@@ -11,6 +11,7 @@ var dead = false
 var speed = 100
 var entityType = "enemy"
 var speedEffectChange = 1.0
+var hitParticleColor = Color(0.8, 0.8, 0.8)
 
 var stateEffects: Array[SateEffect] = []
 

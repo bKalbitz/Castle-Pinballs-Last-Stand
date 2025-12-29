@@ -89,7 +89,7 @@ texture = ExtResource("1_x8fbi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ktgx5")
 
-[node name="TreeHitParticle" type="GPUParticles2D" parent="."]
+[node name="HitParticle" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 30
 lifetime = 0.5
