@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://3qnhv5mp2wm0"]
+
+[ext_resource type="Script" uid="uid://bih8vnfoc5s1" path="res://scenes/ingame/enemy/dragon.gd" id="1_u4q5y"]
+[ext_resource type="Texture2D" uid="uid://bej3nb5yst54h" path="res://textures/dragon.png" id="2_u4q5y"]
+[ext_resource type="Texture2D" uid="uid://bil6545f6wj7y" path="res://textures/blood.png" id="3_vuuys"]
+[ext_resource type="AudioStream" uid="uid://dccdqmkwmlkjo" path="res://sounds/minotaur_hit.wav" id="4_wtgvj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6hql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u4q5y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqi7j"]
+size = Vector2(110, 120)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkbtl"]
+particle_flag_disable_z = true
+angle_min = -203.29999
+angle_max = 200.00002
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+angular_velocity_min = 1.9999839
+angular_velocity_max = 9.999984
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 4.9999776
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 4.9999976
+radial_accel_max = 29.999996
+scale_min = 0.5
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+
+[node name="Dragon" type="Area2D" groups=["reset_game_group"]]
+script = ExtResource("1_u4q5y")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.39215687)
+z_index = -1
+position = Vector2(30.999998, 87)
+rotation = -3.1415927
+scale = Vector2(1, 0.75)
+skew = -0.7853982
+texture = ExtResource("2_u4q5y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a6hql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_cqi7j")
+
+[node name="OnHitParticle" type="GPUParticles2D" parent="."]
+position = Vector2(0, -10)
+emitting = false
+texture = ExtResource("3_vuuys")
+one_shot = true
+explosiveness = 0.81
+randomness = 0.12
+process_material = SubResource("ParticleProcessMaterial_lkbtl")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wtgvj")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="finished" from="OnHitParticle" to="." method="_on_on_hit_particle_finished"]

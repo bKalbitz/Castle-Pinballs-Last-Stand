@@ -16,7 +16,8 @@ signal gameOver
 var Ball = preload("res://scenes/ingame/player/ball.tscn")
 var Skelet = preload("res://scenes/ingame/enemy/skeleton_warrior.tscn")
 var Minotaur = preload("res://scenes/ingame/enemy/minotaur.tscn")
-var enememy_types = [Skelet, Minotaur]
+var Dragon = preload("res://scenes/ingame/enemy/dragon.tscn")
+var enememy_types = [Skelet, Skelet, Skelet, Minotaur, Minotaur, Dragon]
 var camera_follow_ball = true
 var current_ball
 var spawnCount = 5
