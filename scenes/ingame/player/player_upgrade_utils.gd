@@ -4,6 +4,7 @@ signal upgradeLoaded
 signal upgraded
 
 enum UpgradeType {
+	DODGE,
 	#FLIPPER_BLAST, 
 	#FLIPPER_SHOT,
 	#FlIPPER_DAMAGE,
@@ -64,7 +65,10 @@ func registerHud(_ingameHud: IngameHud, _levelUpHud:LevelUpHud) -> void:
 	ingameHud = _ingameHud
 	levelUpHud = _levelUpHud
 	levelUpHud.connect("upgrade_selected", Callable(self, "_on_level_up_hud_upgrade_selected"))
-	
+
+func getUpgradeTimerIcon(upgrade: PlayerUpgradeUtils.UpgradeType) -> UpgradeIcon:
+	return ingameHud.getUpgradeIcon(upgrade)
+
 func _on_level_up_hud_upgrade_selected(upgrade: PlayerUpgradeUtils.UpgradeType) -> void:
 	var level: int = upgrades[upgrade]
 	var upgradeConfig = getUpgradeConfig(upgrade)

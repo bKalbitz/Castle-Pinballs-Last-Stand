@@ -8,6 +8,7 @@ const BallSpawn = preload("res://scenes/ingame/player/ball_spawn.tscn")
 
 const MAX_EXPLOSION_TIME = 0.500
 const FIRE_HIT_PARTICLE_COLOR = Color(1, 0.6, 0)
+const DODGE_FORCE = 1000.0
 
 var damage = 1
 var holdTime = 0.0
@@ -17,6 +18,8 @@ var explodeUpgradeActive = false
 var explosionTime = 0.0
 var explosionDamage = 1
 var exploded = false
+
+var dodgeReady = true
 
 var fireBallUpgradeActive = false
 var fireBallActiveTime = 3.0
@@ -39,13 +42,22 @@ func _process(delta: float) -> void:
 	$ShadowSprite2D.position = shadowPosition.rotated(rotation * -1)
 	$ShadowSprite2D.rotation = shadowRotation - rotation
 	
+	var ballColor = Color(1, 1, 1)
+	if dodgeReady:
+		ballColor = Color(0.3, 0.3, 1)
+		var x = Input.get_action_strength("ball_dodge_right") - Input.get_action_strength("ball_dodge_left")
+		var y = Input.get_action_strength("ball_dodge_down") - Input.get_action_strength("ball_dodge_up")
+		if x > 0.8 || y > 0.8 || x < -0.8 || y < -0.8:
+			launch(Vector2(x * DODGE_FORCE, y * DODGE_FORCE))
+			dodgeReady = false
+			PlayerUpgradeUtils.getUpgradeTimerIcon(PlayerUpgradeUtils.UpgradeType.DODGE).startTimer()
+
 	if not inLauncArea and Input.is_action_pressed("ball_action"):
 		holdTime = holdTime + delta * 2.0
 		if holdTime > 1.0:
 			holdTime = 1.0
-		$Sprite2D.modulate = Color(1, 1 - holdTime, 0  - holdTime)
+		ballColor = Color(1, 1 - holdTime, 0  - holdTime)
 	elif not exploded:
-		$Sprite2D.modulate = Color(1, 1, 1)
 		holdTime = 0
 	
 	if holdTime >= 1.0:
@@ -54,7 +66,7 @@ func _process(delta: float) -> void:
 		explosionTime = explosionTime + delta
 		var opaque = 1.0 - explosionTime / MAX_EXPLOSION_TIME
 		$ExplosionArea2D/AnimatedSprite2D.modulate = Color(1, 1, 1, opaque)
-		$Sprite2D.modulate = Color(1, 0, 0, opaque)
+		ballColor = Color(1, 0, 0, opaque)
 		if explosionTime >= MAX_EXPLOSION_TIME:
 			in_off.emit()
 			queue_free()
@@ -76,6 +88,8 @@ func _process(delta: float) -> void:
 					area.addStateEffect(effect)
 		else:
 			$FireArea2D.hide()
+	
+	$Sprite2D.modulate = ballColor
 
 func explode() -> void:
 	exploded = true
@@ -114,6 +128,8 @@ func launch(impulse: Vector2) -> void:
 		currentFireTime = 0
 
 func _on_upgradeLoaded(icon: UpgradeIcon) -> void:
+	if PlayerUpgradeUtils.UpgradeType.DODGE == icon.upgrade:
+		dodgeReady = true
 	if PlayerUpgradeUtils.UpgradeType.BALL_SLOW_DOWN == icon.upgrade:
 		$SetGlueSound.play()
 		var glue = GlueSpot.instantiate()

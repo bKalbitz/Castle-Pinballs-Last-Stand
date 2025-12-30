@@ -115,7 +115,7 @@ text = "Right Flipper:"
 
 [node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/FlipperRightHBoxContainer" instance=ExtResource("2_4gnv0")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../..")
+focus_neighbor_top = NodePath("../../FlipperLeftHBoxContainer/SetKeyButton")
 focus_neighbor_right = NodePath("../SetKeyAltButton")
 focus_neighbor_bottom = NodePath("../../BallActionHBoxContainer/SetKeyButton")
 focus_next = NodePath("../SetKeyAltButton")
@@ -124,6 +124,12 @@ action = "flipper_right"
 
 [node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/FlipperRightHBoxContainer" instance=ExtResource("2_4gnv0")]
 layout_mode = 2
+focus_neighbor_left = NodePath("../SetKeyButton")
+focus_neighbor_top = NodePath("../../FlipperLeftHBoxContainer/SetKeyAltButton")
+focus_neighbor_right = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_neighbor_bottom = NodePath("../../BallActionHBoxContainer/SetKeyAltButton")
+focus_next = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../SetKeyButton")
 action = "flipper_right"
 action_key_index = 1
 
@@ -138,7 +144,7 @@ text = "Launch or Reset Ball:"
 layout_mode = 2
 focus_neighbor_top = NodePath("../..")
 focus_neighbor_right = NodePath("../SetKeyAltButton")
-focus_neighbor_bottom = NodePath("../../OpenMenuHBoxContainer/SetKeyButton")
+focus_neighbor_bottom = NodePath("../../BallDodgeUpHBoxContainer/SetKeyButton")
 focus_next = NodePath("../SetKeyAltButton")
 focus_previous = NodePath("../../FlipperLeftHBoxContainer/SetKeyAltButton")
 action = "ball_action"
@@ -146,10 +152,111 @@ action = "ball_action"
 [node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/BallActionHBoxContainer" instance=ExtResource("2_4gnv0")]
 layout_mode = 2
 focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath("../../BallDodgeUpHBoxContainer/SetKeyAltButton")
+focus_next = NodePath("../../BallDodgeUpHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "ball_action"
+action_key_index = 1
+
+[node name="BallDodgeUpHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/BallDodgeUpHBoxContainer"]
+layout_mode = 2
+text = "Ball up dogde:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeUpHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../BallDodgeDownHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../FlipperRightHBoxContainer/SetKeyAltButton")
+action = "ball_dodge_up"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeUpHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../..")
 focus_neighbor_bottom = NodePath("../../OpenMenuHBoxContainer/SetKeyButton")
 focus_next = NodePath("../../../../HBoxContainer/SaveButton")
 focus_previous = NodePath("../SetKeyButton")
-action = "ball_action"
+action = "ball_dodge_up"
+action_key_index = 1
+
+[node name="BallDodgeDownHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/BallDodgeDownHBoxContainer"]
+layout_mode = 2
+text = "Ball down dodge:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeDownHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallDodgeUpHBoxContainer/SetKeyButton")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../BallDodgeLeftHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../BallDodgeUpHBoxContainer/SetKeyAltButton")
+action = "ball_dodge_down"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeDownHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../SetKeyButton")
+focus_neighbor_top = NodePath("../../BallDodgeUpHBoxContainer/SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../BallDodgeLeftHBoxContainer/SetKeyAltButton")
+focus_next = NodePath("../../BallDodgeLeftHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "ball_dodge_down"
+action_key_index = 1
+
+[node name="BallDodgeLeftHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/BallDodgeLeftHBoxContainer"]
+layout_mode = 2
+text = "Ball left dodge:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeLeftHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallDodgeDownHBoxContainer/SetKeyButton")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../BallDodgeRightHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../BallDodgeDownHBoxContainer/SetKeyAltButton")
+action = "ball_dodge_left"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeLeftHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallDodgeDownHBoxContainer/SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../BallDodgeRightHBoxContainer/SetKeyAltButton")
+focus_next = NodePath("../../BallDodgeRightHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "ball_dodge_left"
+action_key_index = 1
+
+[node name="BallDodgeRightHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/BallDodgeRightHBoxContainer"]
+layout_mode = 2
+text = "Ball right dodge:"
+
+[node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeRightHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallDodgeLeftHBoxContainer/SetKeyButton")
+focus_neighbor_right = NodePath("../SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../OpenMenuHBoxContainer/SetKeyButton")
+focus_next = NodePath("../SetKeyAltButton")
+focus_previous = NodePath("../../BallDodgeLeftHBoxContainer/SetKeyAltButton")
+action = "ball_dodge_right"
+
+[node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/BallDodgeRightHBoxContainer" instance=ExtResource("2_4gnv0")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../BallDodgeLeftHBoxContainer/SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../OpenMenuHBoxContainer/SetKeyAltButton")
+focus_next = NodePath("../../OpenMenuHBoxContainer/SetKeyButton")
+focus_previous = NodePath("../SetKeyButton")
+action = "ball_dodge_right"
 action_key_index = 1
 
 [node name="OpenMenuHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Controls"]
@@ -161,18 +268,18 @@ text = "Back to Menu:"
 
 [node name="SetKeyButton" parent="VBoxContainer/TabContainer/Controls/OpenMenuHBoxContainer" instance=ExtResource("2_4gnv0")]
 layout_mode = 2
-focus_neighbor_top = NodePath("../../BallActionHBoxContainer/SetKeyButton")
+focus_neighbor_top = NodePath("../../BallDodgeRightHBoxContainer/SetKeyButton")
 focus_neighbor_right = NodePath("../SetKeyAltButton")
 focus_neighbor_bottom = NodePath("../../../../HBoxContainer/SaveButton")
 focus_next = NodePath("../SetKeyAltButton")
-focus_previous = NodePath("../../BallActionHBoxContainer/SetKeyAltButton")
+focus_previous = NodePath("../../BallDodgeRightHBoxContainer/SetKeyAltButton")
 action = "open_menu"
 
 [node name="SetKeyAltButton" parent="VBoxContainer/TabContainer/Controls/OpenMenuHBoxContainer" instance=ExtResource("2_4gnv0")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../SetKeyButton")
-focus_neighbor_top = NodePath("../../BallActionHBoxContainer/SetKeyButton")
-focus_neighbor_bottom = NodePath("../SetKeyButton")
+focus_neighbor_top = NodePath("../../BallDodgeRightHBoxContainer/SetKeyAltButton")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer/SaveButton")
 focus_next = NodePath("../../../../HBoxContainer/SaveButton")
 focus_previous = NodePath("../SetKeyButton")
 action = "open_menu"

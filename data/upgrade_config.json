@@ -1,4 +1,22 @@
 {
+	"DODGE": {
+		"title": "Dodge",
+		"icon": "res://textures/icons/dodge.png",
+		"levels": [
+			{
+				"text": "DODGE level 1 description",
+				"timeout": 1.0
+			},
+			{
+				"text": "DODGE level 2 description",
+				"timeout": 0.5
+			},
+			{
+				"text": "DODGE level 3 description",
+				"timeout": 0.25
+			}
+		]
+	}, 
 	"FLIPPER_BLAST": {
 		"title": "Flipper Blast",
 		"icon": "res://textures/icons/tower_shoot.png",

@@ -146,6 +146,7 @@ func newGame(levelScene: String) -> void:
 	recalcView()
 	PlayerUpgradeUtils.reset()
 	PlayerUpgradeUtils.registerHud($IngameHud, $LevelUpHud)
+	PlayerUpgradeUtils._on_level_up_hud_upgrade_selected(PlayerUpgradeUtils.UpgradeType.DODGE)
 	setPaused(false)
 
 func recalcView() -> void:

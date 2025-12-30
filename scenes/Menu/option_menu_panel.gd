@@ -5,10 +5,6 @@ signal aborted
 
 var resolution
 var fullscreen
-var actionFlipperRight
-var actionFlipperLeft
-var actionBallAction
-var actionOpenMenu
 var volume: float
 
 # Called when the node enters the scene tree for the first time.
@@ -18,11 +14,14 @@ func _ready() -> void:
 func loadSettiings() -> void:
 	fullscreen = SimpleSettings.get_value("game", "video/fullscreen", false)
 	resolution = SimpleSettings.get_value("game", "video/resolution", "1980x1080")
-	actionFlipperLeft = SimpleSettings.get_value("game", "control/action_flipper_left", null)
-	actionFlipperLeft = loadActionInput("flipper_left")
-	actionFlipperRight = loadActionInput("flipper_right")
-	actionBallAction = loadActionInput("ball_action")
-	actionOpenMenu = loadActionInput("open_menu")
+	loadActionInput("flipper_left")
+	loadActionInput("flipper_right")
+	loadActionInput("ball_action")
+	loadActionInput("ball_dodge_up")
+	loadActionInput("ball_dodge_down")
+	loadActionInput("ball_dodge_right")
+	loadActionInput("ball_dodge_left")
+	loadActionInput("open_menu")
 	volume = SimpleSettings.get_value("game", "sound/volume", 1.0)
 	
 	var resOptions = $VBoxContainer/TabContainer/Video/ResolutionHBoxContainer/OptionButton
@@ -69,6 +68,10 @@ func _on_save_button_pressed() -> void:
 	saveAction("flipper_left")
 	saveAction("flipper_right")
 	saveAction("ball_action")
+	saveAction("ball_dodge_up")
+	saveAction("ball_dodge_down")
+	saveAction("ball_dodge_left")
+	saveAction("ball_dodge_right")
 	saveAction("open_menu")
 	SimpleSettings.save()
 	
