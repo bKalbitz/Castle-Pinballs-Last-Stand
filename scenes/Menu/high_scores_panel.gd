@@ -79,12 +79,12 @@ func _on_submit_button_button_down() -> void:
 	if scores.size() == 0:
 		newScores.append(entry)
 	else:
+		var newEntryAdded = false
 		for s in scores:
-			if s["score"] > entry["score"]:
-				newScores.append(s)
-			else:
+			if not newEntryAdded and entry["score"] > s["score"]:
 				newScores.append(entry)
-				newScores.append(s)
+				newEntryAdded = true
+			newScores.append(s)
 	
 	if newScores[newScores.size() - 1]["score"]  > entry["score"]:
 		newScores.append(entry)
