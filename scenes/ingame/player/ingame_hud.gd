@@ -49,4 +49,6 @@ func createUpgradeIcon(_upgrade: PlayerUpgradeUtils.UpgradeType, _loadTime: floa
 
 func clearUpgrades() -> void:
 	for node in $VFlowContainer/Upgrades.get_children():
+		$VFlowContainer/Upgrades.remove_child(node)
 		node.queue_free()
+	
