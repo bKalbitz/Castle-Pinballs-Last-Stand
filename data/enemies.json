@@ -1,0 +1,14 @@
+[
+	{
+		"name": "Skelet",
+		"resource": "res://scenes/ingame/enemy/skeleton_warrior.tscn"
+	},
+	{
+		"name": "Minotaur",
+		"resource": "res://scenes/ingame/enemy/minotaur.tscn"
+	},
+	{
+		"name": "Dragon",
+		"resource": "res://scenes/ingame/enemy/dragon.tscn"
+	}
+]

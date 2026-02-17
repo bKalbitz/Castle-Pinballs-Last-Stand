@@ -11,9 +11,8 @@ func _ready() -> void:
 	for levelData in levels:
 		var levelName = levelData["name"]
 		var levelIcon = levelData["thumbnail"]
-		var levelScene = levelData["scene"]
 		var levelSelection = LevelSelectScene.instantiate();
-		levelSelection.setData(levelName, levelIcon, levelScene)
+		levelSelection.setData(levelName, levelIcon, levelData)
 		$LevelSelectBoxContainer.add_child(levelSelection)
 		preButton.focus_neighbor_bottom = levelSelection.get_path()
 		levelSelection.focus_neighbor_top = preButton.get_path()
@@ -32,8 +31,10 @@ func showLevelSelect() -> void:
 	show()
 	$LevelSelectBoxContainer/BackButton.grab_focus.call_deferred()
 
-func _on_level_selected(levelScene: String) -> void:
-	level_selected.emit(levelScene)
+func _on_level_selected(levelData: Dictionary) -> void:
+	var level = LevelData.new()
+	level.loadData(levelData)
+	level_selected.emit(level)
 
 func _on_back_button_pressed() -> void:
 	pressed_back.emit()

@@ -24,5 +24,8 @@ autostart = true
 
 [node name="LevelUpHud" parent="." instance=ExtResource("5_ruvbs")]
 
+[node name="IngameTimer" type="Timer" parent="."]
+
 [connection signal="in_off" from="Ball" to="." method="_on_ball_in_off"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="IngameTimer" to="." method="_on_ingame_timer_timeout"]

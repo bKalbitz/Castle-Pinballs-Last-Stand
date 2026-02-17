@@ -1,0 +1,20 @@
+[
+	{
+		"startTime": 0,
+		"spawnTimer": 1,
+		"spawnCount": 5,
+		"spawnPool": ["Skelet"]
+	},
+	{
+		"startTime": 120,
+		"spawnTimer": 0.9,
+		"spawnCount": 7,
+		"spawnPool": ["Skelet", "Skelet", "Minotaur"]
+	},
+	{
+		"startTime": 300,
+		"spawnTimer": 0.5,
+		"spawnCount": 10,
+		"spawnPool": ["Skelet", "Skelet", "Skelet", "Minotaur", "Minotaur", "Dragon"]
+	},
+]

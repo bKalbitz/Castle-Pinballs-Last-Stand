@@ -13,11 +13,8 @@ const GUI_OFFSET = 5
 
 signal gameOver
 
+var levelData: LevelData
 var Ball = preload("res://scenes/ingame/player/ball.tscn")
-var Skelet = preload("res://scenes/ingame/enemy/skeleton_warrior.tscn")
-var Minotaur = preload("res://scenes/ingame/enemy/minotaur.tscn")
-var Dragon = preload("res://scenes/ingame/enemy/dragon.tscn")
-var enememy_types = [Skelet, Skelet, Skelet, Minotaur, Minotaur, Dragon]
 var camera_follow_ball = true
 var current_ball
 var spawnCount = 5
@@ -26,6 +23,8 @@ var leftFliper: Flipper
 var rightFliper: Flipper
 var launchArea: LaunchArea
 var enemyMoveTo: Vector2
+
+var inGameTime = 0.0
 var health = MAX_HEALTH
 var score: int = 0
 var xp: int = 0
@@ -83,16 +82,20 @@ func _on_ball_in_off(loseHealth = true) -> void:
 
 
 func _on_spawn_timer_timeout() -> void:
-	for i in spawnCount:
+	var time = inGameTime + $IngameTimer.wait_time - $IngameTimer.time_left
+	var enemies = levelData.getSpawns(time)
+	for enemyScene in enemies:
 		var x = level.getEnemySpawnPosX() + (randi() % level.getEnemySpawnOffsetX())
 		var y = level.getEnemySpawnPosY() + (randi() % level.getEnemySpawnOffsetY())
 		var target = enemyMoveTo
-		var enemy = enememy_types[randi() % enememy_types.size()].instantiate()
+		var enemy = enemyScene.instantiate()
 		enemy.move_to = target
 		enemy.position = Vector2(x, y)
 		enemy.connect("destroyed", Callable(self, "_on_enemy_destroyed"))
 		enemy.connect("playerDamaged", Callable(self, "_on_enemy_playerDamaged"))
 		add_child(enemy)
+	$SpawnTimer.wait_time = levelData.getNextSpawnTimer(time)
+	$SpawnTimer.start()
 
 func _on_enemy_destroyed(addScore: int, enemy: Area2D) -> void:
 	score = score + addScore
@@ -117,9 +120,11 @@ func setPaused(_paused: bool) -> void:
 		$Camera2D.make_current()
 	get_tree().paused = _paused
 
-func newGame(levelScene: String) -> void:
-	if not levelScene:
+func newGame(_levelData: LevelData) -> void:
+	if not _levelData:
 		return
+	levelData = _levelData
+	
 	if level:
 		level.queue_free()
 	get_tree().call_group("reset_game_group", "queue_free")
@@ -129,7 +134,7 @@ func newGame(levelScene: String) -> void:
 	score = 0
 	playerLevel = 0
 	nextPlayerLevelXp = LEVEL_UP_DELTA
-	level = load(levelScene).instantiate()
+	level = load(levelData.scenePath).instantiate()
 	$IngameHud.setScore(0)
 	$IngameHud.setHealth(MAX_HEALTH, MAX_HEALTH)
 	$IngameHud.setXp(xp, nextPlayerLevelXp)
@@ -147,9 +152,15 @@ func newGame(levelScene: String) -> void:
 	PlayerUpgradeUtils.reset()
 	PlayerUpgradeUtils.registerHud($IngameHud, $LevelUpHud)
 	PlayerUpgradeUtils._on_level_up_hud_upgrade_selected(PlayerUpgradeUtils.UpgradeType.DODGE)
+	inGameTime = 0.0
+	$IngameTimer.start()
 	setPaused(false)
 
 func recalcView() -> void:
 	$SplitScreen.initSplitScreenView()
 	$IngameHud.setWidth(get_viewport().get_visible_rect().size.x - GUI_OFFSET * 2)
 	$LevelUpHud.setWidth(get_viewport().get_visible_rect().size.x - GUI_OFFSET * 2)
+
+
+func _on_ingame_timer_timeout() -> void:
+	inGameTime += $IngameTimer.wait_time

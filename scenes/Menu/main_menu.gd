@@ -54,8 +54,8 @@ func _on_level_select_panel_pressed_back() -> void:
 	$MainMenuPanel.show()
 	$MainMenuPanel/MainMenuVBoxContainer/NewGameButton.grab_focus.call_deferred()
 
-func _on_level_select_panel_level_selected(levelScene: String) -> void:
-	newGame.emit(levelScene)
+func _on_level_select_panel_level_selected(levelData: LevelData) -> void:
+	newGame.emit(levelData)
 
 func _on_option_button_pressed() -> void:
 	$OptionMenuPanel.loadSettiings()

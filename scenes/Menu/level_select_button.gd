@@ -1,12 +1,12 @@
 class_name LevelSelectButton extends Button
 
 signal level_selected
-var levelScene: String
+var levelData: Dictionary
 
-func setData(_name: String, _icon: String, _levelScene: String) -> void:
+func setData(_name: String, _icon: String, _levelData: Dictionary) -> void:
 	text = _name
 	icon = load(_icon)
-	levelScene = _levelScene
+	levelData = _levelData
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,4 +19,4 @@ func _process(delta: float) -> void:
 
 
 func _on_pressed() -> void:
-	level_selected.emit(levelScene)
+	level_selected.emit(levelData)

@@ -33,11 +33,11 @@ func _on_main_menu_continue_game() -> void:
 	$IngameRoot.setPaused(false)
 
 
-func _on_main_menu_new_game(levelScene: String) -> void:
+func _on_main_menu_new_game(levelData: LevelData) -> void:
 	$MainMenu.ingame = true
 	$MainMenu.hide()
 	$IngameRoot.show()
-	$IngameRoot.newGame(levelScene)
+	$IngameRoot.newGame(levelData)
 
 
 func _on_main_menu_video_settings_changed() -> void:
