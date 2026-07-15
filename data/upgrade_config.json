@@ -197,6 +197,24 @@
 			}
 		]
 	},
+	"CHARGE": {
+		"title": "CHARGE",
+		"icon": "res://textures/icons/charge.png",
+		"levels": [
+			{
+				"text": "Spawns 2 friendly soldiers every 3 secondes.",
+				"timeout": 3.0
+			},
+			{
+				"text": "Spawns 4 friendly soldiers every 2 secondes.",
+				"timeout": 2.0
+			},
+			{
+				"text": "Spawns 6 friendly soldiers every second.",
+				"timeout": 1.0
+			}
+		]
+	},
 	"REPAIR": {
 		"title": "Repair",
 		"icon": "res://textures/icons/repair.png",

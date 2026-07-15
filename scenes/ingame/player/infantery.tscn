@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://2fckokjpd5an"]
+
+[ext_resource type="Script" uid="uid://5gka7xhl6hjs" path="res://scenes/ingame/player/infantery.gd" id="1_116ku"]
+[ext_resource type="Texture2D" uid="uid://cfmaop6monav6" path="res://textures/infantry.png" id="1_lu01b"]
+[ext_resource type="Texture2D" uid="uid://bil6545f6wj7y" path="res://textures/blood.png" id="3_mih5n"]
+[ext_resource type="AudioStream" uid="uid://dccdqmkwmlkjo" path="res://sounds/minotaur_hit.wav" id="4_dhc7r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_116ku"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lu01b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2igx8"]
+size = Vector2(57, 63)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o7fin"]
+particle_flag_disable_z = true
+angle_min = -203.29999
+angle_max = 200.00002
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+angular_velocity_min = 1.9999839
+angular_velocity_max = 9.999984
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 4.9999776
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 4.9999976
+radial_accel_max = 29.999996
+scale_min = 0.5
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+
+[node name="Infantery" type="Area2D"]
+script = ExtResource("1_116ku")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_116ku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1.5, -0.5)
+shape = SubResource("RectangleShape2D_2igx8")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.39215687)
+position = Vector2(13.999997, 43.000004)
+rotation = -3.1415927
+scale = Vector2(-1, 0.75)
+skew = -0.7853982
+texture = ExtResource("1_lu01b")
+
+[node name="AtackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="OnHitParticle" type="GPUParticles2D" parent="."]
+position = Vector2(0, -10)
+emitting = false
+texture = ExtResource("3_mih5n")
+one_shot = true
+explosiveness = 0.81
+randomness = 0.12
+process_material = SubResource("ParticleProcessMaterial_o7fin")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dhc7r")
+
+[node name="AtackedTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="finished" from="OnHitParticle" to="." method="_on_on_hit_particle_finished"]

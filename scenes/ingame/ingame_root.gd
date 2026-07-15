@@ -94,6 +94,7 @@ func _on_spawn_timer_timeout() -> void:
 		enemy.connect("destroyed", Callable(self, "_on_enemy_destroyed"))
 		enemy.connect("playerDamaged", Callable(self, "_on_enemy_playerDamaged"))
 		add_child(enemy)
+		EnemyRegister.add(enemy)
 	$SpawnTimer.wait_time = levelData.getNextSpawnTimer(time)
 	$SpawnTimer.start()
 
@@ -128,6 +129,7 @@ func newGame(_levelData: LevelData) -> void:
 	if level:
 		level.queue_free()
 	get_tree().call_group("reset_game_group", "queue_free")
+	EnemyRegister.removeAll()
 	$LevelUpHud.hide()
 	health = MAX_HEALTH
 	xp = 0
