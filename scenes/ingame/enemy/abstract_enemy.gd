@@ -19,6 +19,13 @@ var stateEffects: Array[SateEffect] = []
 func _ready() -> void:
 	pass # Replace with function body.
 
+func _initConfig(enemyName: String) -> void:
+	var config = IngameConfig.getEnemyConfig(enemyName)
+	health = config.health
+	damage = config.damage
+	speed = config.speed
+	scorePoints = config.scorePoints
+	
 func _exit_tree() -> void:
 	EnemyRegister.remove(self)
 

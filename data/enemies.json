@@ -1,14 +1,26 @@
 [
 	{
 		"name": "Skelet",
-		"resource": "res://scenes/ingame/enemy/skeleton_warrior.tscn"
+		"resource": "res://scenes/ingame/enemy/skeleton_warrior.tscn",
+		"health": 1.0,
+		"damage": 10.0,
+		"speed": 100.0,
+		"scorePoints": 10
 	},
 	{
 		"name": "Minotaur",
-		"resource": "res://scenes/ingame/enemy/minotaur.tscn"
+		"resource": "res://scenes/ingame/enemy/minotaur.tscn",
+		"health": 3.0,
+		"damage": 20.0,
+		"speed": 75.0,
+		"scorePoints": 20
 	},
 	{
 		"name": "Dragon",
-		"resource": "res://scenes/ingame/enemy/dragon.tscn"
+		"resource": "res://scenes/ingame/enemy/dragon.tscn",
+		"health": 5.0,
+		"damage": 30.0,
+		"speed": 35.0,
+		"scorePoints": 30
 	}
 ]

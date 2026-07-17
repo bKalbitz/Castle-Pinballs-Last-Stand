@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SimpleSettings="*res://addons/simple-settings/simple-settings.gd"
 PlayerUpgradeUtils="*res://scenes/ingame/player/player_upgrade_utils.gd"
 EnemyRegister="*res://scenes/ingame/enemy/enemy_register.gd"
+IngameConfig="*res://scenes/ingame/ingame_config.gd"
 
 [display]
 

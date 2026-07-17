@@ -1,11 +1,10 @@
 extends AbstractEnemy
 
+const NAME = "Skelet"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
-	health = 1
-	damage = 10
-	speed = 100
+	_initConfig(NAME)
 	hitParticleColor = Color(0.8, 0.8, 0.8)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
