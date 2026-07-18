@@ -1,11 +1,11 @@
 extends Area2D
 
-var lifeTimeDuration = 3.0
+var lifeTimeDuration = IngameConfig.playerConfig.glueLifeTimeDuration
 var lifeTime = 0.0
-var effectDuration = 1.0
+var effectDuration = IngameConfig.playerConfig.glueEffectDuration
 var effectColor = Color(0.5, 0.0, 1.0)
-var effectSpeed = 0.5
-var effectDamage = 0.0
+var effectSpeed = IngameConfig.playerConfig.glueEffectSpeed
+var effectDamage = IngameConfig.playerConfig.glueInitialEffectDamage
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +23,7 @@ func setValueUpgrade() -> void:
 	if level > 0:
 		scale = Vector2(level, level * 0.5)
 		if level > 2:
-			effectDamage = 1.0
+			effectDamage = IngameConfig.playerConfig.glueUpgradedEffectDamage
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,31 +1,34 @@
 extends RigidBody2D
 
 signal in_off
-const BALL_SPAWN_LAUNCH_SPEED = 1000
+
 const GlueSpot = preload("res://scenes/ingame/player/glue_spot.tscn")
 const Mine = preload("res://scenes/ingame/player/mine.tscn")
 const BallSpawn = preload("res://scenes/ingame/player/ball_spawn.tscn")
 
-const MAX_EXPLOSION_TIME = 0.500
-const FIRE_HIT_PARTICLE_COLOR = Color(1, 0.6, 0)
-const DODGE_FORCE = 1000.0
 
-var damage = 1
+const FIRE_HIT_PARTICLE_COLOR = Color(1, 0.6, 0)
+
+var maxExplosionTime = IngameConfig.playerConfig.ballMaxExplosionTime
+var ballDodgeForce = IngameConfig.playerConfig.ballDodgeForce
+
+var ballSpawnLaunchSpeed = IngameConfig.playerConfig.ballSpawnlaunchSpeed
+var damage = IngameConfig.playerConfig.ballDamage
 var holdTime = 0.0
 var inLauncArea = false
 
 var explodeUpgradeActive = false
 var explosionTime = 0.0
-var explosionDamage = 1
+var explosionDamage = IngameConfig.playerConfig.ballExplosionDamage
 var exploded = false
 
 var dodgeReady = true
 
 var fireBallUpgradeActive = false
-var fireBallActiveTime = 3.0
+var fireBallActiveTime = IngameConfig.playerConfig.ballFireBallActiveTime
 var currentFireTime = 3.0
-var fireBallStateEffectDuration = 0.5
-var fireBallStateEffectDamage = 1.0
+var fireBallStateEffectDuration = IngameConfig.playerConfig.ballFireBallStateEffectDuration
+var fireBallStateEffectDamage = IngameConfig.playerConfig.ballFireBallStateEffectDamage
 var fireBallStateEffectColor = Color(1, 0, 0)
 
 @onready var shadowPosition = $ShadowSprite2D.position
@@ -48,7 +51,7 @@ func _process(delta: float) -> void:
 		var x = Input.get_action_strength("ball_dodge_right") - Input.get_action_strength("ball_dodge_left")
 		var y = Input.get_action_strength("ball_dodge_down") - Input.get_action_strength("ball_dodge_up")
 		if x > 0.8 || y > 0.8 || x < -0.8 || y < -0.8:
-			launch(Vector2(x * DODGE_FORCE, y * DODGE_FORCE))
+			launch(Vector2(x * ballDodgeForce, y * ballDodgeForce))
 			dodgeReady = false
 			PlayerUpgradeUtils.getUpgradeTimerIcon(PlayerUpgradeUtils.UpgradeType.DODGE).startTimer()
 
@@ -64,10 +67,10 @@ func _process(delta: float) -> void:
 		if not exploded:
 			explode()
 		explosionTime = explosionTime + delta
-		var opaque = 1.0 - explosionTime / MAX_EXPLOSION_TIME
+		var opaque = 1.0 - explosionTime / maxExplosionTime
 		$ExplosionArea2D/AnimatedSprite2D.modulate = Color(1, 1, 1, opaque)
 		ballColor = Color(1, 0, 0, opaque)
-		if explosionTime >= MAX_EXPLOSION_TIME:
+		if explosionTime >= maxExplosionTime:
 			in_off.emit()
 			queue_free()
 			
@@ -157,7 +160,7 @@ func createBallSpawn(moveX: int, moveY: int) -> void:
 	var ballSpawn = BallSpawn.instantiate()
 	ballSpawn.position = Vector2(position.x + offset * moveX , position.y + offset * moveY)
 	get_parent().add_child(ballSpawn)
-	ballSpawn.launch(Vector2(BALL_SPAWN_LAUNCH_SPEED * moveX, BALL_SPAWN_LAUNCH_SPEED * moveY))
+	ballSpawn.launch(Vector2(ballSpawnLaunchSpeed * moveX, ballSpawnLaunchSpeed * moveY))
 
 func _on_upgraded(upgrade: PlayerUpgradeUtils.UpgradeType) -> void:
 	if PlayerUpgradeUtils.UpgradeType.BALL_EXPLODE == upgrade:

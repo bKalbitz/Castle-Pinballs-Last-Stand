@@ -1,11 +1,13 @@
 extends EnemyBlockingArea2D
 
-const BALL_LAUNCH_SPEED = 2500
+
 const SHOOT_PARTICLE_Y_OFFSET = -60
-var TowerShootingParticles = preload("res://scenes/ingame/player/tower_shooting_particles.tscn")
-var shootTargetCount = 1
+const TowerShootingParticles = preload("res://scenes/ingame/player/tower_shooting_particles.tscn")
+var ballLaunchSpeed = IngameConfig.playerConfig.bumperTowerBallLaunchSpeed
+var initialShootTargetCount = IngameConfig.playerConfig.bumperTowerInitialTargetCount
+var shootTargetCount = initialShootTargetCount
 var shootReady = false
-var damage = 1
+var damage = IngameConfig.playerConfig.bumperTowerDamage
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	PlayerUpgradeUtils.connect("upgradeLoaded", Callable(self, "_on_upgradeLoaded"))
@@ -32,10 +34,10 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("launch"):
 		var vector = position.direction_to(body.position)
-		body.launch(Vector2(vector.x * BALL_LAUNCH_SPEED, vector.y * BALL_LAUNCH_SPEED))
+		body.launch(Vector2(vector.x * ballLaunchSpeed, vector.y * ballLaunchSpeed))
 
 func _on_upgradeLoaded(icon: UpgradeIcon) -> void:
 	if PlayerUpgradeUtils.UpgradeType.BUMPER_SHOOT == icon.upgrade:
 		icon.startTimer()
-		shootTargetCount = icon.level
+		shootTargetCount = initialShootTargetCount * icon.level
 		shootReady = true

@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var mirrored: bool = false
+var impulse = IngameConfig.playerConfig.slingShotImpulse
 var collisionHandled = false
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +14,7 @@ func _process(delta: float) -> void:
 	pass
 
 func launchBody(body: Node2D, direction: Vector2) -> void:
-	body.launch(Vector2(direction.x * 2500, direction.y * 2500))
+	body.launch(Vector2(direction.x * impulse, direction.y * impulse))
 	
 func _on_upper_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("launch") && not collisionHandled:

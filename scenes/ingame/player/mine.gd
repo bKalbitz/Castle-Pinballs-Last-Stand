@@ -1,16 +1,17 @@
 extends Node2D
 
-const LIFE_TIME_PER_LEVEL = 3.0
+
 const MAX_EXPLOSION_TIME = 0.500
 
-var lifeTimeDuration = LIFE_TIME_PER_LEVEL
+var lifeTimePerLevel = IngameConfig.playerConfig.mineLifeTimePerLevel
+var lifeTimeDuration = lifeTimePerLevel
 var lifeTime = 0.0
 var addBurnEffect = false
-var effectDuration = 1.0
+var effectDuration = IngameConfig.playerConfig.mineEffectDuration
 var effectColor = Color(1.0, 0.0, 0.0)
-var effectDamage = 1.0
+var effectDamage = IngameConfig.playerConfig.mineEffectDamage
 
-var explosionDamage = 1.0
+var explosionDamage = IngameConfig.playerConfig.mineExplosionDamage
 var explosionTime = 0.0
 var exploded = false
 
@@ -61,11 +62,11 @@ func explode() -> void:
 
 func setValueUpgrade() -> void:
 	if not PlayerUpgradeUtils.upgrades.has(PlayerUpgradeUtils.UpgradeType.BALL_MINE):
-		lifeTimeDuration = LIFE_TIME_PER_LEVEL
+		lifeTimeDuration = lifeTimePerLevel
 		return
 	var level = PlayerUpgradeUtils.upgrades[PlayerUpgradeUtils.UpgradeType.BALL_MINE]
 	if level > 0:
-		lifeTimeDuration = LIFE_TIME_PER_LEVEL * level
+		lifeTimeDuration = lifeTimePerLevel * level
 		var explosionScale = level / 2.0
 		$ExplosionArea2D/AnimatedSprite2D.scale = Vector2(explosionScale, explosionScale)
 		$ExplosionArea2D/CollisionShape2D.scale = Vector2(explosionScale, explosionScale)

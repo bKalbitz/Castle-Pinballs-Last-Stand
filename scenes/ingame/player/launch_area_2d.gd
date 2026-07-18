@@ -1,7 +1,7 @@
 class_name LaunchArea extends Area2D
 
 const MAX = 1.0
-const IMPULSE_Y = -5000
+var impulseY = IngameConfig.playerConfig.launchAreaImpulseY
 var ball
 var power = 0
 
@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	else:
 		if power > 0 && ball && ball.has_method("launch"):
 			$ShootSound.play()
-			var impulse = Vector2(0, IMPULSE_Y * power)
+			var impulse = Vector2(0, impulseY * power)
 			ball.launch(impulse)
 			$CannonFireParticle.restart()
 		power = 0

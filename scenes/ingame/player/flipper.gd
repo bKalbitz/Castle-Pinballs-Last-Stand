@@ -1,7 +1,7 @@
 class_name Flipper extends RigidBody2D
 
 const INFANTERY_SPACING = 64
-const ROOTATION_SPEED = -25
+
 const RIGHT_TOP_RAD = -135
 const LEFT_TOP_RAD = -45
 const RIGHT_BOTTOM_RAD = -192
@@ -9,8 +9,9 @@ const LEFT_BOTTOM_RAD = 12
 
 const Infantery = preload("res://scenes/ingame/player/infantery.tscn")
 
+var rotationSpeed = IngameConfig.playerConfig.flipperRotationSpeed
 var pressed = false
-var damage = 1
+var damage = IngameConfig.playerConfig.flipperDamage
 @export var right_side = false
 @export var input_key = "flipper_left"
 # Called when the node enters the scene tree for the first time.
@@ -24,10 +25,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed(input_key):
 		if right_side:
 			if rotation < deg_to_rad(RIGHT_TOP_RAD):
-				rotate(ROOTATION_SPEED * delta * -1)
+				rotate(rotationSpeed * delta * -1)
 		else:
 			if rotation > deg_to_rad(LEFT_TOP_RAD):
-				rotate(ROOTATION_SPEED * delta)
+				rotate(rotationSpeed * delta)
 		if not pressed:
 			pressed = true
 			hitEnemies()
@@ -37,10 +38,10 @@ func _process(delta: float) -> void:
 		pressed = false
 		if right_side:
 			if rotation > deg_to_rad(RIGHT_BOTTOM_RAD):
-				rotate(ROOTATION_SPEED * delta)
+				rotate(rotationSpeed * delta)
 		else:
 			if rotation < deg_to_rad(LEFT_BOTTOM_RAD):
-				rotate(ROOTATION_SPEED * delta * -1)
+				rotate(rotationSpeed * delta * -1)
 
 func hitEnemies() -> void:
 	var areas = $HitArea.get_overlapping_areas()

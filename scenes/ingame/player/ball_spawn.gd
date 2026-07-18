@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-var damage = 0.5
-var duration = 4.0
+var damage = IngameConfig.playerConfig.ballSpawnDamage
+var duration = IngameConfig.playerConfig.ballSpawnDuration
 var lifeTime = 0.0
 
 # Called when the node enters the scene tree for the first time.

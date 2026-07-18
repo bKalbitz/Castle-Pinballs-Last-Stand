@@ -1,8 +1,8 @@
 extends Area2D
 
-var speed = 100
-var health = 20
-var damage = 2
+var speed = IngameConfig.playerConfig.infanterySpeed
+var health = IngameConfig.playerConfig.infanteryHealth
+var damage = IngameConfig.playerConfig.infanteryDamage
 var range = 64;
 
 # Called when the node enters the scene tree for the first time.
