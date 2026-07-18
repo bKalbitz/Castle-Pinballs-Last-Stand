@@ -19,7 +19,8 @@ var inLauncArea = false
 
 var explodeUpgradeActive = false
 var explosionTime = 0.0
-var explosionDamage = IngameConfig.playerConfig.ballExplosionDamage
+var initialExplosionDamage = IngameConfig.playerConfig.ballExplosionDamage
+var explosionDamage = initialExplosionDamage
 var exploded = false
 
 var dodgeReady = true
@@ -175,7 +176,7 @@ func setExplosionUpgrade() -> void:
 	var level = PlayerUpgradeUtils.upgrades[PlayerUpgradeUtils.UpgradeType.BALL_EXPLODE]
 	if level > 0:
 		explodeUpgradeActive = true
-		explosionDamage = level
+		explosionDamage = initialExplosionDamage * level
 		$ExplosionArea2D/AnimatedSprite2D.scale = Vector2(level, level)
 		$ExplosionArea2D/CollisionShape2D.scale = Vector2(level, level)
 
