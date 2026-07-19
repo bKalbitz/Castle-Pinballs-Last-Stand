@@ -12,8 +12,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 
-func applyDamage(damge: float, type: String) -> void:
-	super(damge, type)
+func applyDamage(applied: float, type: String) -> void:
+	super(applied, type)
 	if not $OnHitParticle.emitting:
 		$OnHitParticle.restart()
 		$DamageSound.play()
@@ -21,6 +21,9 @@ func applyDamage(damge: float, type: String) -> void:
 	if dead:
 		$ShadowSprite2D.hide()
 		$AnimatedSprite2D.hide()
+
+func _getDamageDisplay() -> DamageIndicator:
+	return $DamageIndicator
 
 func _on_on_hit_particle_finished() -> void:
 	if health <= 0:

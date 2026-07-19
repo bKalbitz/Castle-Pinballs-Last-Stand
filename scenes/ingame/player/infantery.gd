@@ -60,11 +60,12 @@ func _handleAttack(enemy: AbstractEnemy) -> void:
 			$AtackedTimer.start()
 			applyDamage(enemy.damage, "basic")
 
-func applyDamage(damge: float, type: String) -> void:
+func applyDamage(applied: float, type: String) -> void:
 	if health <= 0:
 		return
 
-	health = health - damge
+	health = health - applied
+	$DamageIndicator.applyDamage(applied)
 	if not $OnHitParticle.emitting:
 		$OnHitParticle.restart()
 		$DamageSound.play()

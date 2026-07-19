@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5ijdtpb04gh0"]
+[gd_scene load_steps=9 format=3 uid="uid://b5ijdtpb04gh0"]
 
 [ext_resource type="Script" uid="uid://bk7m5tq3qfv2m" path="res://scenes/ingame/enemy/minotaur.gd" id="1_j83iw"]
 [ext_resource type="Texture2D" uid="uid://bfnofpow1ql8n" path="res://textures/minotaur.png" id="2_j83iw"]
 [ext_resource type="Texture2D" uid="uid://bil6545f6wj7y" path="res://textures/blood.png" id="3_j83iw"]
 [ext_resource type="AudioStream" uid="uid://dccdqmkwmlkjo" path="res://sounds/minotaur_hit.wav" id="4_j83iw"]
+[ext_resource type="PackedScene" uid="uid://cvs2yvj52n5g1" path="res://scenes/ingame/enemy/damage_indicator.tscn" id="5_thp1g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a6hql"]
 animations = [{
@@ -70,6 +71,9 @@ process_material = SubResource("ParticleProcessMaterial_lkbtl")
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_j83iw")
+
+[node name="DamageIndicator" parent="." instance=ExtResource("5_thp1g")]
+position = Vector2(0, -29)
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="finished" from="OnHitParticle" to="." method="_on_on_hit_particle_finished"]

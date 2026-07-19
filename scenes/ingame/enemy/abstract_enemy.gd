@@ -5,10 +5,11 @@ signal playerDamaged
 
 var scorePoints = 10
 @export var move_to: Vector2
-var health = 1
-var damage = 10
+var health = 10.0
+var maxHealth = health
+var damage = 10.0
 var dead = false
-var speed = 100
+var speed = 100.0
 var entityType = "enemy"
 var speedEffectChange = 1.0
 var hitParticleColor = Color.RED
@@ -22,6 +23,7 @@ func _ready() -> void:
 func _initConfig(enemyName: String) -> void:
 	var config = IngameConfig.getEnemyConfig(enemyName)
 	health = config.health
+	maxHealth = health
 	damage = config.damage
 	speed = config.speed
 	scorePoints = config.scorePoints
@@ -72,11 +74,17 @@ func leaveTable() -> void:
 	playerDamaged.emit(damage)
 	queue_free()
 
-func applyDamage(damge: float, type: String) -> void:
-	health = health - damge
+func applyDamage(applied: float, type: String) -> void:
+	health = health - applied
 	
 	if health <= 0:
 		dead = true
+	var damageDisplay = _getDamageDisplay();
+	if damageDisplay:
+		damageDisplay.applyDamage(applied)
+
+func _getDamageDisplay() -> DamageIndicator:
+	return null
 
 func addStateEffect(newEffect: SateEffect) -> void:
 	var found = false

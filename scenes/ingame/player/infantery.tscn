@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://2fckokjpd5an"]
+[gd_scene load_steps=9 format=3 uid="uid://2fckokjpd5an"]
 
 [ext_resource type="Script" uid="uid://5gka7xhl6hjs" path="res://scenes/ingame/player/infantery.gd" id="1_116ku"]
 [ext_resource type="Texture2D" uid="uid://cfmaop6monav6" path="res://textures/infantry.png" id="1_lu01b"]
 [ext_resource type="Texture2D" uid="uid://bil6545f6wj7y" path="res://textures/blood.png" id="3_mih5n"]
 [ext_resource type="AudioStream" uid="uid://dccdqmkwmlkjo" path="res://sounds/minotaur_hit.wav" id="4_dhc7r"]
+[ext_resource type="PackedScene" uid="uid://cvs2yvj52n5g1" path="res://scenes/ingame/enemy/damage_indicator.tscn" id="5_dhc7r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_116ku"]
 animations = [{
@@ -77,5 +78,8 @@ stream = ExtResource("4_dhc7r")
 
 [node name="AtackedTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DamageIndicator" parent="." instance=ExtResource("5_dhc7r")]
+position = Vector2(0, -29)
 
 [connection signal="finished" from="OnHitParticle" to="." method="_on_on_hit_particle_finished"]
