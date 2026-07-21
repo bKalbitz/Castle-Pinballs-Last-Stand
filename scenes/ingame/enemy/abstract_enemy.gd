@@ -27,6 +27,9 @@ func _initConfig(enemyName: String) -> void:
 	damage = config.damage
 	speed = config.speed
 	scorePoints = config.scorePoints
+	_getDamageDisplay().maxHealth = maxHealth
+	_getDamageDisplay().currentHealth = maxHealth
+	
 	
 func _exit_tree() -> void:
 	EnemyRegister.remove(self)
@@ -53,7 +56,7 @@ func handleMovement(delta: float) -> void:
 func handleEffects(delta: float) -> void:
 	speedEffectChange = 1.0
 	modulate = Color(1, 1, 1)
-	var damage = 0.0
+	var effectDamage = 0.0
 	var activeEffects: Array[SateEffect] = []
 	for effect in stateEffects:
 		modulate =  effect.getColorChange(modulate)
@@ -62,13 +65,13 @@ func handleEffects(delta: float) -> void:
 				speedEffectChange =  effect.speedEffect
 			else:	
 				speedEffectChange = (speedEffectChange + effect.speedEffect) / 2 
-		damage = damage + effect.damageOverTime
+		effectDamage = effectDamage + effect.damageOverTime
 		if effect.process(delta):
 			activeEffects.append(effect)
 			
 	stateEffects = activeEffects
-	if damage > 0.0:
-		applyDamage(damage * delta, "basic")
+	if effectDamage > 0.0:
+		applyDamage(effectDamage * delta, "basic")
 
 func leaveTable() -> void:
 	playerDamaged.emit(damage)

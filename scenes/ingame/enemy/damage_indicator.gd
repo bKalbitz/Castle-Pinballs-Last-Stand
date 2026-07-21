@@ -15,6 +15,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if showDamage:
+		$HealthBar.max_value = maxHealth
+		$HealthBar.value = currentHealth
 		var modify = $DisplayDamageTimer.time_left / $DisplayDamageTimer.wait_time;
 		var textSize = 2.0 - modify
 		$DamageText.scale = Vector2(textSize, textSize)
@@ -23,7 +25,7 @@ func _process(delta: float) -> void:
 
 func applyDamage(damage: float) -> void:
 	currentHealth = currentHealth - damage
-	$DamageText.text =  str(damage)
+	$DamageText.text = str("%.2f" % damage)
 	$HealthBar.value = currentHealth 
 	$DamageText.scale = Vector2(1, 1)
 	$DamageText.position = originalTextPosition

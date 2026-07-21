@@ -21,7 +21,7 @@
 	"glueUpgradedEffectDamage": 10.0,
 	"infanterySpeed": 100.0,
 	"infanteryHealth": 20.0,
-	"infanteryDamage": 20.0,
+	"infanteryDamage": 10.0,
 	"launchAreaImpulseY": -5000.0,
 	"slingShotImpulse": 2500.0,
 	"mineLifeTimePerLevel": 3.0,

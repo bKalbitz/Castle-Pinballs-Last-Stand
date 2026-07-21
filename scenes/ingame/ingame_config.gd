@@ -11,6 +11,7 @@ func _loadEnemyConfig() -> Dictionary[String, EnemyConfig]:
 		var enemyConfig = EnemyConfig.new()
 		enemyConfig.name = enemyData["name"]
 		enemyConfig.health = enemyData["health"]
+		enemyConfig.damage = enemyData["damage"]
 		enemyConfig.speed = enemyData["speed"]
 		enemyConfig.scorePoints = enemyData["scorePoints"]
 		config[enemyConfig.name] = enemyConfig
